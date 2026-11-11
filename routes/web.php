@@ -86,6 +86,7 @@ Route::middleware('auth')->group(function () {
             'productos.xlsx'
         );
     })->name('productos.export');
+    Route::get('/productos/departamento/{id}', [ProductoController::class, 'porDepartamento'])->name('productos.porDepartamento');
 
     /* ===================== ENTRADAS ===================== */
     Route::get('/entradas', [EntradaController::class, 'index'])->name('entradas');

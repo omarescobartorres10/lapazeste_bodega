@@ -639,6 +639,28 @@ class ProductoController extends Controller
         }
     }
 
+        public function porDepartamento($id)
+    {
+        $user = Auth::user();
+
+        $query = Producto::with([
+            'categoria',
+            'departamento',
+            'bodega',
+            'tipoProducto',
+            'unidades'
+        ])->where('departamento_id', $id);
+
+        // Si el usuario está restringido a una bodega, solo ve esa bodega
+        if ($user->bodega_id) {
+            $query->where('bodega_id', $user->bodega_id);
+        }
+
+        return response()->json(
+            $query->orderBy('nombre', 'asc')->paginate(5)
+        );
+    }
+
     /**
      * ================================================================
      * TODOS LOS PRODUCTOS
