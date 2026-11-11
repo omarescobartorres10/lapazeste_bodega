@@ -1,0 +1,116 @@
+/* Estilo general del sidebar */
+.sidebar {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);    
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* Íconos y texto */
+.sidebar .nav-link {
+    color: #ffffff;
+    padding: 12px 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+}
+
+/* Hover */
+.sidebar .nav-link:hover {
+    background-color: #374fcf;
+    color: #ffffff;
+    border-radius: 0 30px 30px 0;
+}
+
+/* Encabezados */
+.sidebar .sidebar-heading, .sidebar .sidebar-heading1 {
+    color: #cbd5e1;
+    font-size: 13px;
+    padding: 0 20px;
+    margin-top: 15px;
+}
+
+/* Colapsables */
+.collapse-inner a:hover {
+    background-color: #e0e7ff !important;
+    color: #1e3a8a;
+}
+
+/* Iconos secundarios */
+.collapse-item i {
+    width: 20px;
+}
+
+/* Responsivo: en pantallas pequeñas solo íconos */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar .nav-link span,
+    .sidebar .sidebar-heading,
+    .sidebar .sidebar-heading1 {
+        display: none;
+    }
+
+    .sidebar .sidebar-brand-text {
+        display: none;
+    }
+
+    .sidebar .nav-link {
+        justify-content: center;
+    }
+
+    .sidebar .collapse {
+        position: absolute;
+        left: 70px;
+        width: 200px;
+        z-index: 1000;
+    }
+
+    .sidebar.toggled {
+        width: 250px;
+    }
+
+    .sidebar.toggled .nav-link span,
+    .sidebar.toggled .sidebar-heading,
+    .sidebar.toggled .sidebar-heading1,
+    .sidebar.toggled .sidebar-brand-text {
+        display: inline;
+    }
+
+    .sidebar.toggled .nav-link {
+        justify-content: start;
+    }
+}
+
+
+
+/* ------------------------------- */
+
+/* Reducir el tamaño del texto cuando el sidebar se cierra */
+#accordionSidebar.toggled .sidebar-heading {
+    font-size: 6px; /* Ajusta el tamaño según sea necesario */
+    padding-left: 10px; /* Ajusta el relleno para que el texto quede alineado */
+}
+
+/* Mantener el tamaño normal cuando el sidebar está abierto */
+#accordionSidebar .sidebar-heading {
+    font-size: 16px; /* O el tamaño original */
+}
+
+/* Reducir el tamaño del texto cuando el sidebar se cierra */
+#accordionSidebar.toggled .sidebar-heading1 {
+    font-size: 6px; /* Ajusta el tamaño según sea necesario */
+    padding-left: 10px; /* Ajusta el relleno para que el texto quede alineado */
+}
+
+/* Mantener el tamaño normal cuando el sidebar está abierto */
+#accordionSidebar .sidebar-heading1 {
+    font-size: 16px; /* O el tamaño original */
+}
+

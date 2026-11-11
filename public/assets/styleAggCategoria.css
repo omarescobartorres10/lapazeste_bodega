@@ -1,0 +1,180 @@
+.custom-toast {
+    background: linear-gradient(135deg, #28c76f, #20c997);
+    color: white;
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: slideFade 0.5s ease-in-out;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    min-width: 280px;
+    max-width: 350px;
+}
+
+.custom-toast.error {
+    background: linear-gradient(135deg, #e74c3c, #e84118);
+}
+
+.toast-icon {
+    font-size: 1.8rem;
+    animation: pulse 1.5s infinite;
+}
+
+.toast-text {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.toast-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.toast-close:hover {
+    transform: rotate(90deg);
+}
+
+@keyframes slideFade {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Estilo general para la tabla */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Encabezado de la tabla */
+.custom-table thead {
+    background: linear-gradient(90deg, #2c3e50, #6c757d);
+    color: white;
+}
+
+.card-header {
+    background: linear-gradient(90deg, #2c3e50, #6c757d);
+    color: white;
+}
+
+/* Fila de encabezado */
+/* Centrar encabezados de la tabla */
+.custom-table th {
+    text-align: center; /* Centra el texto en los encabezados */
+    padding: 12px 15px;  /* Mantener el mismo padding que antes */
+    font-weight: 600;
+}
+
+
+/* Filas del cuerpo de la tabla */
+.custom-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-top: 1px solid #f1f1f1;
+}
+
+/* Filas alternas */
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Efecto hover en las filas */
+.custom-table tbody tr:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Estado activo e inactivo */
+.estado-activo {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.estado-inactivo {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Botones */
+.btn-circle {
+    border-radius: 50%;
+    padding: 10px 12px;
+    font-size: 16px;
+}
+
+/* Modificar modal */
+.modal-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-body {
+    font-size: 16px;
+}
+
+.modal-footer button {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-footer button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo del botón agregar */
+.btn-success {
+    font-size: 16px;
+    padding: 8px 20px;
+}
+
+
+
+/* Estilo general para los botones */
+.btn {
+    display: inline-flex;
+    align-items: center; /* Asegura que el icono y el texto estén alineados verticalmente */
+    justify-content: center; /* Centra el contenido (icono + texto) */
+    font-size: 14px;
+    padding: 8px 12px; /* Ajuste de padding para que el contenido no quede demasiado comprimido */
+}
+
+/* Estilo del icono */
+.btn i {
+    font-size: 16px; /* Aumenta ligeramente el tamaño del icono */
+}
+
+/* Espaciado entre el icono y el texto */
+.btn .ms-2 {
+    margin-left: 8px; /* Espaciado entre el icono y el texto */
+}
+
+/* Botón con texto */
+.btn span {
+    font-size: 14px; /* Ajusta el tamaño del texto */
+}

@@ -1,0 +1,110 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2980b9;
+    color: white;
+    padding: 10px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+}
+.logo {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+}
+.header-text {
+    font-size: 16px;
+    text-align: left;
+}
+.header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+.date-range {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 18px;
+    color: #555;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.table th {
+    background-color: #3498db;
+    color: white;
+}
+.table td {
+    background-color: #f9f9f9;
+}
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #777;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2c3e50; /* Color de fondo elegante y moderno */
+    color: white;
+    padding: 30px;
+    border-radius: 10px; /* Bordes redondeados para un toque más suave */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra más intensa para darle profundidad */
+    margin-bottom: 30px; /* Espacio por debajo del encabezado */
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.logo {
+    width: 70px; /* Aumento el tamaño del logo para hacerlo más visible */
+    height: auto;
+    margin-bottom: 15px; /* Más espacio entre el logo y el texto */
+}
+
+.header-text p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #ecf0f1; /* Color más suave para el texto */
+}
+
+h2 {
+    margin: 10px 0 0 0; /* Espacio solo arriba del título */
+    font-size: 32px; /* Mayor tamaño de fuente para el título */
+    font-weight: 700;
+    text-align: center;
+    color: #e74c3c; /* Color vibrante para el título */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil para darle mayor énfasis al título */
+}

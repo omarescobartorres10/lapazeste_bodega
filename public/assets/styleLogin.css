@@ -1,0 +1,176 @@
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0b3f83;
+    color: #fff;
+}
+
+/* Fuentes */
+h1, .form-label {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Estilo de los textos personalizados */
+.custom-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #f1f1f1;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Espacio entre párrafos personalizados */
+.custom-text + .custom-text {
+    margin-top: -3px;
+}
+
+/* Estilo para el contenedor del formulario */
+.vh-100 {
+    height: 100vh;
+}
+
+.container {
+    height: 100%;
+}
+
+/* Estilo para la imagen */
+.col-md-6.col-lg-5 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.img-fluid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    object-fit: contain;
+}
+
+/* Estilo para el formulario */
+.card {
+    border-radius: 1rem;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+}
+
+.card-body {
+    padding: 3rem 4rem;
+    color: #333;
+}
+
+h1 {
+    color: #0b3f83;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilo para los campos de entrada */
+.form-outline {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+    padding: 1.2rem;
+    font-size: 1rem;
+    color: #333;
+    width: 100%;
+    background-color: #f5f5f5;
+    border: 2px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+/* Efectos de enfoque */
+.form-control:focus {
+    border-color: #0b3f83;
+    box-shadow: 0 0 5px rgba(11, 63, 131, 0.5);
+    outline: none;
+}
+
+/* Efecto en las etiquetas cuando se enfoca el campo */
+.form-control:focus + .form-label,
+.form-control:not(:placeholder-shown) + .form-label {
+    top: -25px;
+    font-size: 14px;
+    color: #0b3f83;
+}
+
+/* Estilo para las etiquetas */
+.form-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    padding: 0 5px;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Estilo del botón */
+.btn {
+    padding: 0.8rem 3rem;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #0b3f83;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #1f5fbb;
+}
+
+/* Responsividad para dispositivos móviles */
+@media (max-width: 767.98px) {
+    .logo-mobile {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 576px) {
+    .form-control {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+/* Estilo para el contenedor de la imagen */
+.col-md-6.col-lg-5 {
+    position: relative; /* Necesario para colocar la imagen de forma absoluta */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+}
+
+/* Estilo para la imagen */
+.img-fluid {
+    position: absolute; /* Coloca la imagen de forma absoluta dentro de su contenedor */
+    top: 230px; /* 50% desde la parte superior */
+    left: 55%; /* 50% desde la izquierda */
+    transform: translate(-50%, -50%); /* Ajusta para centrar la imagen de manera perfecta */
+    height: auto;
+    object-fit: contain; /* Asegura que la imagen no se deforme */
+}

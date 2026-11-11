@@ -1,0 +1,11 @@
+/* Estilo por defecto para los botones */
+.btn-sm {
+    font-size: 1rem; /* Tamaño de fuente ajustado */
+}
+
+/* Responsividad en pantallas pequeñas (menos de 768px) */
+@media (max-width: 768px) {
+    .btn {
+        font-size: 0.85rem;  /* Ajuste de tamaño de fuente para pantallas pequeñas */
+    }
+}

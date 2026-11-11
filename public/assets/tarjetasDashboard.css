@@ -1,0 +1,345 @@
+/* ==========================================
+   TARJETAS PRINCIPALES DEL DASHBOARD
+   ========================================== */
+
+.dashboard-card {
+    border-radius: 18px;
+    padding: 12px 12px;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Hover sutil */
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18) !important;
+}
+
+.dashboard-icon {
+    font-size: 1.7rem;
+    margin-bottom: 4px;
+    opacity: 0.92;
+}
+
+.dashboard-title {
+    font-size: .75rem;
+    font-weight: 600;
+    opacity: .9;
+    margin-bottom: 2px;
+    letter-spacing: .3px;
+}
+
+.dashboard-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 0px;
+}
+
+
+/* ==========================================
+   ESTILO GENERAL DEL LAYOUT
+   ========================================== */
+
+body {
+    background: #f4f7fa !important;
+}
+
+.container-fluid {
+    max-width: 1600px;
+}
+
+/* Cards globales */
+.card {
+    border-radius: 18px !important;
+    background-color: #ffffff;
+}
+
+/* encabezados dentro de tarjetas */
+.card-header {
+    border-radius: 18px 18px 0 0 !important;
+    padding: 12px 18px;
+}
+
+/* Títulos globales */
+h2, h5 {
+    letter-spacing: .4px;
+}
+
+/* Suavizar sombras */
+.shadow-sm {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10) !important;
+}
+
+/* Celdas de listas */
+.list-group-item {
+    border: none;
+    padding: 10px 5px;
+    background: transparent;
+}
+
+.list-group-item + .list-group-item {
+    border-top: 1px solid #efefef !important;
+}
+
+
+/* ==========================================
+   SELECT FILTRO DE BODEGA
+   ========================================== */
+
+#filtroBodega {
+    height: 40px;
+    font-size: 0.9rem;
+    border-width: 2px;
+    font-weight: 600;
+    color: #2d3748;
+    transition: all .25s ease;
+}
+
+/* Hover y focus con efecto “premium” */
+#filtroBodega:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 12px rgba(0, 128, 0, 0.25);
+}
+
+#filtroBodega:focus {
+    transform: scale(1.03);
+    box-shadow: 0 0 14px rgba(0, 128, 0, 0.35) !important;
+    border-color: #198754 !important;
+}
+
+/* Icono del input-group */
+.input-group-text {
+    transition: .25s ease;
+}
+
+#filtroBodega:focus + .input-group-text,
+.input-group-text:hover {
+    box-shadow: 0 0 12px rgba(0, 128, 0, 0.25) !important;
+}
+
+/* Efecto flash al cambiar de bodega (clase usada desde JS) */
+.select-flash {
+    animation: flashSelect .35s ease;
+}
+
+@keyframes flashSelect {
+    0% { background-color: #e9ffe9; }
+    100% { background-color: white; }
+}
+
+
+/* ==========================================
+   LOADER GENERAL (SI LO USAS)
+   ========================================== */
+
+#loader-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    transition: opacity .4s ease;
+}
+
+#loader-screen .loader-img {
+    width: 130px;
+    height: auto;
+    animation: fade 1.4s infinite alternate;
+}
+
+@keyframes fade {
+    from { opacity: 0.4; transform: scale(0.96); }
+    to   { opacity: 1;   transform: scale(1); }
+}
+
+body.loading {
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   🌟 ANIMACIÓN GLOBAL — dashboard-animate
+   ========================================== */
+
+/* Esta clase la usas en:
+   - contenedor del filtro
+   - columnas de tarjetas
+   - columnas de cards inferiores
+*/
+
+.dashboard-animate {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: slideFadeIn .55s ease-out forwards;
+}
+
+/* Animación de entrada */
+@keyframes slideFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cascada automática (en cada fila se resetea el conteo, queda bien igual) */
+.dashboard-animate:nth-child(1) { animation-delay: .05s; }
+.dashboard-animate:nth-child(2) { animation-delay: .10s; }
+.dashboard-animate:nth-child(3) { animation-delay: .15s; }
+.dashboard-animate:nth-child(4) { animation-delay: .20s; }
+.dashboard-animate:nth-child(5) { animation-delay: .25s; }
+.dashboard-animate:nth-child(6) { animation-delay: .30s; }
+.dashboard-animate:nth-child(7) { animation-delay: .35s; }
+.dashboard-animate:nth-child(8) { animation-delay: .40s; }
+.dashboard-animate:nth-child(9) { animation-delay: .45s; }
+.dashboard-animate:nth-child(10){ animation-delay: .50s; }
+
+
+/* ==========================================
+   RESPONSIVE: TABLETS
+   ========================================== */
+
+@media (max-width: 992px) {
+
+    .container-fluid {
+        padding-inline: 12px;
+    }
+
+    .dashboard-card {
+        padding: 12px !important;
+        min-height: 95px !important;
+    }
+
+    .dashboard-icon {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-title {
+        font-size: 0.72rem;
+    }
+
+    .dashboard-value {
+        font-size: 1.15rem;
+    }
+
+    .card {
+        padding: 6px !important;
+    }
+
+    .card-header h5 {
+        font-size: 1.05rem;
+    }
+}
+
+
+/* ==========================================
+   RESPONSIVE: MÓVILES
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .container-fluid {
+        padding: 8px !important;
+    }
+
+    /* Título principal */
+    h2 {
+        font-size: 1.4rem !important;
+    }
+
+    /* Filtro */
+    #filtroBodega {
+        font-size: 0.8rem;
+        height: 38px;
+    }
+
+    .input-group-text {
+        font-size: 1rem !important;
+        padding: 6px 10px;
+    }
+
+    /* Tarjetas más compactas */
+    .dashboard-card {
+        padding: 10px !important;
+        min-height: 85px !important;
+    }
+
+    .dashboard-icon {
+        font-size: 1.4rem !important;
+        margin-bottom: 3px !important;
+    }
+
+    .dashboard-title {
+        font-size: 0.7rem !important;
+    }
+
+    .dashboard-value {
+        font-size: 1.05rem !important;
+    }
+
+    /* Cards generales */
+    .card {
+        padding: 8px !important;
+    }
+
+    .card-header h5 {
+        font-size: 1rem !important;
+        text-align: center;
+    }
+
+    /* Gráficos responsivos */
+    canvas {
+        max-height: 240px !important;
+    }
+
+    /* Listas más compactas */
+    .list-group-item {
+        padding: 8px 6px !important;
+    }
+}
+
+
+/* ==========================================
+   RESPONSIVE: MÓVILES MUY PEQUEÑOS
+   ========================================== */
+
+@media (max-width: 360px) {
+
+    .dashboard-card {
+        min-height: 75px !important;
+        padding: 8px !important;
+    }
+
+    .dashboard-icon {
+        font-size: 1.25rem !important;
+    }
+
+    .dashboard-title {
+        font-size: 0.65rem !important;
+    }
+
+    .dashboard-value {
+        font-size: 0.95rem !important;
+    }
+
+    canvas {
+        max-height: 200px !important;
+    }
+
+    .card-header h5 {
+        font-size: 0.9rem !important;
+    }
+}

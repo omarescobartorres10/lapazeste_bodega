@@ -1,0 +1,56 @@
+@keyframes move {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+.move {
+    animation: move 5s ease-in-out infinite;
+}
+
+#entradasSalidasPrestamosChart {
+    max-width: 400px;
+    max-height: 400px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto; /* Centrado opcional */
+}
+
+
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+}
+
+.card-header {
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 1.25rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-header h5 {
+    margin: 0;
+}
+
+.card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.card-header {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);    
+    color: white;
+}
