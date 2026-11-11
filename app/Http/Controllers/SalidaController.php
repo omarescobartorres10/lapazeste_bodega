@@ -94,7 +94,9 @@ class SalidaController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('salidas')->with('success', 'Salidas registradas correctamente.');
+                    return redirect()->route('salidas')
+            ->with('success', 'Salidas registradas correctamente.')
+            ->with('pdf_codigo', $codigoOperacion);
 
         } catch (\Throwable $e) {
 

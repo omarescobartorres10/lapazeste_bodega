@@ -481,15 +481,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    @if(session('success'))
+        @if(session('success'))
         Swal.fire({
             icon: 'success',
             title: 'Éxito',
             text: '{{ session('success') }}',
-            timer: 2500,
-            showConfirmButton: false
+            @if(session('pdf_codigo'))
+                showCancelButton: true,
+                confirmButtonText: '<i class="fa-solid fa-file-pdf"></i> Ver Comprobante',
+                cancelButtonText: 'Cerrar',
+                confirmButtonColor: '#0f766e',
+            @else
+                timer: 2500,
+                showConfirmButton: false
+            @endif
+        }).then((result) => {
+            // Si el usuario hace clic en "Ver Comprobante", abrimos el PDF
+            @if(session('pdf_codigo'))
+                if (result.isConfirmed) {
+                    window.open("{{ route('salidas.pdf', session('pdf_codigo')) }}", '_blank');
+                }
+            @endif
         });
     @endif
+
+        
 
     @if(session('error'))
         Swal.fire({
