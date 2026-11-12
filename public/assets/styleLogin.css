@@ -36,7 +36,7 @@ h1, .form-label {
     height: 100%;
 }
 
-/* Estilo para la imagen */
+/* Estilo para el contenedor de la imagen */
 .col-md-6.col-lg-5 {
     position: relative;
     display: flex;
@@ -45,10 +45,11 @@ h1, .form-label {
     height: 100vh;
 }
 
+/* Estilo para la imagen */
 .img-fluid {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 230px;
+    left: 55%;
     transform: translate(-50%, -50%);
     height: auto;
     object-fit: contain;
@@ -152,25 +153,3 @@ h1 {
     }
 }
 
-
-
-
-
-/* Estilo para el contenedor de la imagen */
-.col-md-6.col-lg-5 {
-    position: relative; /* Necesario para colocar la imagen de forma absoluta */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
-}
-
-/* Estilo para la imagen */
-.img-fluid {
-    position: absolute; /* Coloca la imagen de forma absoluta dentro de su contenedor */
-    top: 230px; /* 50% desde la parte superior */
-    left: 55%; /* 50% desde la izquierda */
-    transform: translate(-50%, -50%); /* Ajusta para centrar la imagen de manera perfecta */
-    height: auto;
-    object-fit: contain; /* Asegura que la imagen no se deforme */
-}

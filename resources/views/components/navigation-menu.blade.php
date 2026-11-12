@@ -5,8 +5,8 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('panel') }}">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <img class="img-profile rounded-circle" src="{{ asset('img/logo.png') }}" style="width: 45px; height: 45px;">
+        <div class="sidebar-brand-icon">
+            <img class="img-profile rounded-circle" src="{{ asset('logo-blanco.png') }}" style="width: 45px; height: 45px; object-fit: contain;">
         </div>
         <div class="sidebar-brand-text mx-3 d-none d-md-inline">LA PAZ ESTE</div>
     </a>
@@ -15,7 +15,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Panel Heading -->
-    <div class="sidebar-heading text-center d-none d-md-block">
+    <div class="sidebar-heading text-center">
         PANEL
     </div>
 
@@ -23,13 +23,13 @@
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('panel') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span class="d-none d-md-inline">Dashboard</span>
+            <span>Dashboard</span>
         </a>
     </li>
 
     <hr class="sidebar-divider">
 
-    <div class="sidebar-heading1 text-center fw-bold d-none d-md-block">
+    <div class="sidebar-heading1 text-center fw-bold">
         MANTENIMIENTO
     </div>
 
@@ -37,7 +37,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne">
             <i class="fas fa-fw fa-cube"></i>
-            <span class="d-none d-md-inline">INVENTARIO</span>
+            <span>INVENTARIO</span>
         </a>
         <div id="collapseOne" class="collapse" data-bs-parent="#accordionSidebar">
             <div class="bg-light py-2 collapse-inner rounded shadow-sm">
@@ -72,7 +72,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
             <i class="fas fa-fw fa-truck"></i>
-            <span class="d-none d-md-inline">ENTRADAS</span>
+            <span>ENTRADAS</span>
         </a>
         <div id="collapseTwo" class="collapse" data-bs-parent="#accordionSidebar">
             <div class="bg-light py-2 collapse-inner rounded shadow-sm">
@@ -87,7 +87,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUtilities">
             <i class="fas fa-fw fa-arrow-alt-circle-up"></i>
-            <span class="d-none d-md-inline">SALIDAS</span>
+            <span>SALIDAS</span>
         </a>
         <div id="collapseUtilities" class="collapse" data-bs-parent="#accordionSidebar">
             <div class="bg-light py-2 collapse-inner rounded shadow-sm">
@@ -102,7 +102,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseFour">
             <i class="fas fa-exchange-alt"></i>
-            <span class="d-none d-md-inline">PRESTAMOS</span>
+            <span>PRESTAMOS</span>
         </a>
         <div id="collapseFour" class="collapse" data-bs-parent="#accordionSidebar">
             <div class="bg-light py-2 collapse-inner rounded shadow-sm">
@@ -117,7 +117,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTraslados" aria-expanded="false" aria-controls="collapseTraslados">
             <i class="fas fa-truck-moving"></i>
-            <span class="d-none d-md-inline">TRASLADOS</span>
+            <span>TRASLADOS</span>
         </a>
         <div id="collapseTraslados" class="collapse" data-bs-parent="#accordionSidebar">
             <div class="bg-light py-2 collapse-inner rounded shadow-sm">
@@ -141,7 +141,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseFive">
             <i class="fas fa-trash-alt"></i>
-            <span class="d-none d-md-inline">BAJAS</span>
+            <span>BAJAS</span>
         </a>
         <div id="collapseFive" class="collapse" data-bs-parent="#accordionSidebar">
             <div class="bg-light py-2 collapse-inner rounded shadow-sm">
@@ -157,7 +157,7 @@
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSolicitudes">
             <i class="fas fa-envelope-open-text"></i>
 
-            <span class="d-none d-md-inline">
+            <span>
                 SOLICITUDES
                 @if(isset($solicitudesPendientes) && $solicitudesPendientes > 0)
                     <span class="badge badge-warning ml-2">
@@ -178,6 +178,6 @@
         </div>
     </li>
 
-    <hr class="sidebar-divider d-none d-md-block">
+    <hr class="sidebar-divider">
 
 </ul>

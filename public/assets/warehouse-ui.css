@@ -73,7 +73,7 @@ body.warehouse-ui {
 .warehouse-ui .select2-container--default .select2-selection--single .select2-selection__arrow { height: 42px; }
 .warehouse-ui .topbar { margin-bottom: 0 !important; padding-inline: 1rem; }
 .warehouse-ui #userDropdown { gap: .5rem; }
-.warehouse-ui #accordionSidebar { flex-shrink: 0; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); }
+.warehouse-ui #accordionSidebar { flex-shrink: 0; }
 .warehouse-ui #accordionSidebar .nav-link { color: #fff; }
 .warehouse-ui #accordionSidebar .nav-link i { color: #e2e8f0; }
 .warehouse-ui #accordionSidebar .sidebar-heading,
