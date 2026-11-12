@@ -191,6 +191,14 @@ class SalidaController extends Controller
             ], 404);
         }
 
+        // 🛡️ Evitar que se cancele dos veces
+        if ($items->first()->estado == 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta salida ya fue cancelada previamente. El stock ya fue devuelto.'
+            ], 400);
+        }
+
         DB::beginTransaction();
 
         try {
