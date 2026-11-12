@@ -70,4 +70,17 @@ class UserController extends Controller
 
         return back()->with('success', 'Estado del usuario actualizado.');
     }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+
+        if (auth()->id() === $user->id) {
+            return back()->with('error', 'No puedes eliminar tu propio usuario mientras estás logueado.');
+        }
+
+        $user->delete();
+
+        return back()->with('success', 'Usuario eliminado correctamente.');
+    }
 }

@@ -51,7 +51,7 @@ Route::get('/logout', [LoginController::class, 'logout']);
 /* ============================================================
    VALIDAR CÓDIGO / USUARIOS (FUERA AUTH)
 ============================================================ */
-Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
+// Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
 Route::post('/validar-codigo', [CodigoController::class, 'validar'])->name('codigo.validar');
 
 /* ============================================================
@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
 
     /* ===================== USUARIOS ===================== */
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
-    Route::post('/store', [UserController::class, 'store'])->name('usuarios.store');
+    Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
     Route::put('/update/{id}', [UserController::class, 'update'])->name('usuarios.update');
     Route::put('/toggle/{id}', [UserController::class, 'toggleEstado'])->name('usuarios.toggle');
     Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
