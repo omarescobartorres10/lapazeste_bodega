@@ -83,7 +83,7 @@ class SalidaController extends Controller
                     'cantidad'        => $row['cantidad'],
                     'destino'         => strtoupper($validated['destino']),
                     'recibido_por'    => strtoupper($validated['recibido_por']),
-                    'entregado_por'   => strtoupper($validated['entregado_por'] ?? Auth::user()->name),
+                    'entregado_por'   => strtoupper($validated['entregado_por'] ?? Auth::user()->nombre),
                     'observacion'     => strtoupper($row['observacion'] ?? ''),
                     'bodega_id'       => $validated['bodega_id'] ?? $producto->bodega_id,
                     'estado'          => 1,

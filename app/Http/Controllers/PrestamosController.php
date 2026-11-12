@@ -83,7 +83,7 @@ class PrestamosController extends Controller
                     'cantidad'          => $item['cantidad'],
                     'cantidad_devuelta' => 0,
                     'destino'           => strtoupper($request->destino),
-                    'entregado_por'     => strtoupper($request->entregado_por ?? $user->name),
+                    'entregado_por'     => strtoupper($request->entregado_por ?? $user->nombre),
                     'recibido_por'      => strtoupper($request->recibido_por),
                     'observacion'       => strtoupper($item['observacion'] ?? ''),
                     'estado'            => 'prestado',
