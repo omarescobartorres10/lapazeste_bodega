@@ -1,66 +1,211 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SIS Bodega — Sistema de Gestión de Bodega
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**SIS Bodega** es una aplicación web para la gestión integral de inventario y operaciones de bodega, desarrollada con **Laravel 12** y **Livewire 3**.
 
-## About Laravel
+Permite administrar productos, entradas, salidas, préstamos, bajas, traslados y solicitudes de movimiento de inventario entre departamentos y bodegas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Tabla de contenidos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Características](#características)
+- [Tecnologías](#tecnologías)
+- [Requisitos](#requisitos)
+- [Instalación](#instalación)
+- [Módulos del sistema](#módulos-del-sistema)
+- [Roles de usuario](#roles-de-usuario)
+- [Exportación de datos](#exportación-de-datos)
+- [Licencia](#licencia)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Características
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Gestión de inventario**: Registro y control de productos con categorías, tipos y unidades de medida.
+- **Entradas y salidas**: Registro de movimientos de ingreso y egreso de productos con historial y generación de PDF.
+- **Préstamos**: Gestión de préstamos de productos con opción de devolución total o parcial.
+- **Bajas**: Registro de bajas de productos del inventario.
+- **Traslados**: Movimiento de productos entre bodegas con historial y detalle.
+- **Solicitudes públicas**: Flujo de solicitudes externas donde los solicitantes pueden solicitar préstamos, salidas o traslados.
+- **Panel de administración**: Dashboard con resumen de operaciones y gestión de usuarios.
+- **Exportación**: Generación de reportes en PDF y Excel.
+- **Gestión de bodegas y departamentos**: Administración de múltiples bodegas y departamentos.
+- **Autenticación**: Sistema de login para administradores y solicitantes.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Tecnologías
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+| Tecnología | Versión |
+|---|---|
+| PHP | ^8.2 |
+| Laravel | ^12.0 |
+| Livewire | ^3.6 |
+| Laravel DomPDF | ^3.1 |
+| Maatwebsite Excel | ^3.1 |
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Requisitos
 
-## Contributing
+- **PHP** 8.2 o superior
+- **Composer** para la gestión de dependencias
+- **MySQL** o **MariaDB** como base de datos
+- **XAMPP** (opcional, para entorno local en Windows)
+- **Node.js** y **npm** (para compilación de assets Vite)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Instalación
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Clonar el repositorio
 
-## Security Vulnerabilities
+```bash
+git clone <url-del-repositorio>
+cd sis_bodega
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2. Instalar dependencias
 
-## License
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Configurar el entorno
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Editar el archivo `.env` con los datos de tu base de datos:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sis_bodega
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
+
+### 4. Ejecutar migraciones
+
+```bash
+php artisan migrate
+```
+
+### 5. Iniciar el servidor
+
+```bash
+php artisan serve
+```
+
+La aplicación estará disponible en `http://localhost:8000`.
+
+---
+
+## Módulos del sistema
+
+### Panel de administración
+- Dashboard con resumen de operaciones.
+
+### Productos
+- CRUD completo de productos con activación/desactivación.
+- Búsqueda por bodega y departamento.
+- Exportación a Excel.
+
+### Entradas
+- Registro de entradas de productos con carga de facturas.
+- Historial de entradas con detalle y exportación a PDF.
+
+### Salidas
+- Registro de salidas de productos.
+- Historial de salidas con detalle y exportación a PDF.
+- Cancelación de salidas.
+
+### Préstamos
+- Registro de préstamos de productos.
+- Devolución total o parcial.
+- Historial con detalle y exportación a PDF.
+- Cancelación de préstamos.
+
+### Bajas
+- Registro de bajas de productos.
+- Historial con detalle y exportación a PDF.
+- Cancelación de bajas.
+
+### Traslados
+- Movimiento de productos entre bodegas.
+- Historial con detalle y exportación a PDF.
+
+### Solicitudes públicas
+- Flujo de solicitudes externas para préstamos, salidas y traslados.
+- Autenticación de solicitantes con código.
+- Aprobación/rechazo de solicitudes por parte del administrador.
+- Consulta pública de solicitudes por código.
+- Generación de PDF de solicitudes.
+
+### Categorías
+- CRUD de categorías de productos con activación/desactivación.
+
+### Departamentos
+- CRUD completo de departamentos.
+
+### Bodegas
+- Gestión de bodegas con activación/desactivación.
+
+### Tipos de producto
+- Gestión de tipos de producto con activación/desactivación.
+
+### Unidades de medida
+- CRUD de unidades de medida con activación/desactivación.
+
+### Usuarios
+- Gestión de usuarios del sistema con activación/desactivación.
+- Validación de códigos de acceso.
+
+---
+
+## Roles de usuario
+
+| Rol | Acceso |
+|---|---|
+| **Administrador** | Acceso completo a todos los módulos del panel de administración. |
+| **Solicitante** | Acceso al flujo de solicitudes públicas para solicitar préstamos, salidas o traslados. |
+
+---
+
+## Exportación de datos
+
+El sistema soporta la exportación de datos en los siguientes formatos:
+
+- **PDF**: Entradas, salidas, préstamos, bajas, traslados, solicitudes y lista de solicitantes.
+- **Excel**: Lista de productos y lista de solicitantes.
+
+---
+
+## Estructura del proyecto
+
+```
+sis_bodega/
+├── app/
+│   ├── Http/Controllers/     # Controladores del sistema
+│   ├── Models/               # Modelos Eloquent
+│   └── Exports/              # Clases de exportación
+├── routes/
+│   └── web.php               # Rutas web
+├── resources/
+│   └── views/                # Vistas Blade
+├── database/
+│   ├── migrations/           # Migraciones de base de datos
+│   └── seeders/              # Seeders
+├── config/                   # Archivos de configuración
+└── public/                   # Archivos públicos
+```
+
+---
+
+## Licencia
+
+Este proyecto es software propietario. Todos los derechos reservados.
