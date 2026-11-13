@@ -161,8 +161,20 @@ class EntradaController extends Controller
                 'descripcion' => 'nullable|string|max:255',
             ]);
 
+            // 🛡️ PROTECCIÓN: Si el usuario tiene bodega, forzamos esa bodega.
+            // Si es admin, usamos la que envió en el formulario.
+            $user = Auth::user();
+            $bodegaId = $user->bodega_id ?: $validated['bodega_id'];
+
+            if (!$bodegaId) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Debe seleccionar una bodega válida.'
+                ]);
+            }
+
             $existe = Producto::where('codigo', strtoupper($validated['codigo']))
-                ->where('bodega_id', $validated['bodega_id'])
+                ->where('bodega_id', $bodegaId)
                 ->exists();
 
             if ($existe) {
@@ -177,7 +189,7 @@ class EntradaController extends Controller
                 'nombre' => strtoupper($validated['nombre']),
                 'categoria_id' => $validated['categoria_id'],
                 'departamento_id' => $validated['departamento_id'],
-                'bodega_id' => $validated['bodega_id'],
+                'bodega_id' => $bodegaId,
                 'tipo_producto_id' => $validated['tipo_producto_id'],
                 'unidades_id' => $validated['unidades_id'],
                 'descripcion' => strtoupper($validated['descripcion'] ?? ''),

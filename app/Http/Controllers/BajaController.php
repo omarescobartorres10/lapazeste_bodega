@@ -157,9 +157,9 @@ class BajaController extends Controller
             ->where('codigo_operacion', $codigo)
             ->get()
             ->map(fn($b) => [
-                'producto'     => $b->producto->nombre,
-                'categoria'    => $b->categoria->nombre,
-                'departamento' => $b->departamento->nombre,
+                'producto'     => $b->producto?->nombre ?? 'Producto eliminado',
+                'categoria'    => $b->categoria?->nombre ?? '—',
+                'departamento' => $b->departamento?->nombre ?? '—',
                 'cantidad'     => $b->cantidad,
             ]);
 

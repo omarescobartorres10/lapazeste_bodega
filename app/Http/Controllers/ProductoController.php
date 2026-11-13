@@ -79,7 +79,7 @@ class ProductoController extends Controller
          */
         $productos = $query
             ->orderBy('id', 'desc')
-            ->paginate(4)
+            ->paginate(5)
             ->withQueryString();
 
         $categorias = Categoria::where('estado', 1)
@@ -630,6 +630,12 @@ class ProductoController extends Controller
     public function porBodega($id)
     {
         try {
+            $user = Auth::user();
+            
+            // 🛡️ PROTECCIÓN: Si no es admin y pide otra bodega, le tiramos error.
+            if ($user->bodega_id && $user->bodega_id != $id) {
+                return response()->json(['error' => 'No autorizado'], 403);
+            }
 
             $productos = Producto::with([
                 'categoria',
@@ -733,7 +739,12 @@ class ProductoController extends Controller
     public function otrasBodegas(Request $request)
     {
         $user = Auth::user();
-
+        
+        // 🛡️ Si tiene bodega asignada, no puede ver otras bodegas
+        if ($user->bodega_id) {
+            return response()->json(['error' => 'No tienes permiso para ver otras bodegas.'], 403);
+        }
+        
         $bodegaAsignada =
             $user->bodega_id ?? null;
 

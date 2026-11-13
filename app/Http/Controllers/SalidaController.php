@@ -196,7 +196,13 @@ class SalidaController extends Controller
             ], 404);
         }
 
-        // 🛡️ Evitar que se cancele dos veces
+        // 🛡️ NUEVA PROTECCIÓN: Verificar que pertenezca a la bodega del usuario
+        $user = Auth::user();
+        if ($user->bodega_id && $items->first()->bodega_id !== $user->bodega_id) {
+            return response()->json(['success' => false, 'message' => 'No tienes permiso para cancelar salidas de otra bodega.'], 403);
+        }
+
+        // 🛡️ PROTECCIÓN EXISTENTE: Evitar doble cancelación
         if ($items->first()->estado == 0) {
             return response()->json([
                 'success' => false,
