@@ -58,7 +58,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Cierra la sesión del usuario.
+     * Cierra sesion el usuario
      */
     public function logout(Request $request)
     {
@@ -68,4 +68,5 @@ class LoginController extends Controller
         session()->flash('success', 'Sesión cerrada correctamente.');
         return redirect('/login');
     }
+
 }

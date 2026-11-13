@@ -35,6 +35,9 @@
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">
                 <i class="bi bi-plus-circle"></i> Añadir Artículo
             </button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalImportarExcel">
+                <i class="bi bi-upload"></i> Importar Excel
+            </button>
             <button id="btnExportarExcel" class="btn btn-success rounded-pill px-4">
                 <i class="bi bi-file-earmark-excel"></i> Exportar Excel
             </button>
@@ -44,6 +47,7 @@
         @include('pages.partials.modal-agregar-producto')
         @include('pages.partials.modal-editar-producto')
         @include('pages.partials.modal-consulta-producto')
+        @include('pages.partials.modal-importar-excel')
 
         <!-- 🔹 Tabla de Productos -->
         <div class="card shadow-sm">

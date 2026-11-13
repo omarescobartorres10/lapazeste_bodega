@@ -11,6 +11,13 @@ use App\Models\UnidadMedida;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Imports\ProductosImport;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class ProductoController extends Controller
 {
@@ -792,5 +799,199 @@ class ProductoController extends Controller
         return response()->json(
             $productos
         );
+    }
+
+    /**
+     * ================================================================
+     * IMPORTAR PRODUCTOS DESDE EXCEL
+     * ================================================================
+     */
+    public function importar(Request $request)
+    {
+        $request->validate([
+            'archivo_excel' => [
+                'required',
+                'file',
+                'mimes:xlsx,xls',
+                'max:5120', // 5 MB
+            ],
+        ], [
+            'archivo_excel.required' => 'Debe seleccionar un archivo Excel.',
+            'archivo_excel.file'     => 'El archivo subido no es válido.',
+            'archivo_excel.mimes'    => 'El archivo debe ser de tipo Excel (.xlsx o .xls).',
+            'archivo_excel.max'      => 'El archivo no puede pesar más de 5 MB.',
+        ]);
+
+        $user = Auth::user();
+
+        // La bodega se fuerza si el usuario tiene una asignada
+        $bodegaId = $user->bodega_id ?: null;
+
+        $import = new ProductosImport($bodegaId);
+
+        try {
+            Excel::import($import, $request->file('archivo_excel'));
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('productos')
+                ->with('error', 'Error al procesar el archivo: ' . $e->getMessage());
+        }
+
+        // Los resultados están en la hoja interna
+        $resultado = $import->sheet;
+
+        // Construir mensaje de resultado
+        $partes = [];
+        $partes[] = "{$resultado->importados} artículo(s) importado(s) correctamente";
+
+        if ($resultado->duplicados > 0) {
+            $partes[] = "{$resultado->duplicados} duplicado(s) omitido(s)";
+        }
+        if ($resultado->fallidos > 0) {
+            $partes[] = "{$resultado->fallidos} fila(s) con errores";
+        }
+
+        $mensaje = implode('. ', $partes) . '.';
+
+        // Si hubo errores detallados los mostramos
+        if (count($resultado->errores) > 0) {
+            $detalles = array_slice($resultado->errores, 0, 15); // máximo 15
+            $mensaje .= ' Detalle: ' . implode(' | ', $detalles);
+
+            if (count($resultado->errores) > 15) {
+                $mensaje .= ' | ... y ' . (count($resultado->errores) - 15) . ' error(es) más.';
+            }
+        }
+
+        $tipo = $resultado->importados > 0 ? 'success' : 'error';
+
+        return redirect()
+            ->route('productos')
+            ->with($tipo, $mensaje);
+    }
+
+    /**
+     * ================================================================
+     * DESCARGAR PLANTILLA EXCEL PARA IMPORTACIÓN
+     * ================================================================
+     */
+    public function plantillaImportacion()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Plantilla Artículos');
+
+        // ── Encabezados ──
+        $encabezados = [
+            'A1' => 'codigo',
+            'B1' => 'nombre',
+            'C1' => 'descripcion',
+            'D1' => 'stock',
+            'E1' => 'categoria',
+            'F1' => 'tipo_producto',
+            'G1' => 'unidad_medida',
+            'H1' => 'departamento',
+            'I1' => 'bodega',
+        ];
+
+        foreach ($encabezados as $celda => $valor) {
+            $sheet->setCellValue($celda, $valor);
+        }
+
+        // ── Estilos del encabezado ──
+        $headerRange = 'A1:I1';
+        $sheet->getStyle($headerRange)->applyFromArray([
+            'font' => [
+                'bold'  => true,
+                'color' => ['rgb' => 'FFFFFF'],
+                'size'  => 11,
+            ],
+            'fill' => [
+                'fillType'   => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '198754'],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical'   => Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color'       => ['rgb' => '000000'],
+                ],
+            ],
+        ]);
+
+        // ── Fila de ejemplo ──
+        $sheet->setCellValue('A2', 'ART-001');
+        $sheet->setCellValue('B2', 'ESCRITORIO DE MADERA');
+        $sheet->setCellValue('C2', 'ESCRITORIO EJECUTIVO CON 3 CAJONES');
+        $sheet->setCellValue('D2', 10);
+        $sheet->setCellValue('E2', 'MOBILIARIO');
+        $sheet->setCellValue('F2', 'CONSUMIBLE');
+        $sheet->setCellValue('G2', 'UNIDAD');
+        $sheet->setCellValue('H2', 'ADMINISTRACIÓN');
+        $sheet->setCellValue('I2', 'BODEGA CENTRAL');
+
+        $sheet->getStyle('A2:I2')->getFont()->setItalic(true)->getColor()->setRGB('6C757D');
+
+        // ── Anchos de columna ──
+        $anchos = ['A' => 15, 'B' => 30, 'C' => 40, 'D' => 10, 'E' => 20, 'F' => 20, 'G' => 20, 'H' => 25, 'I' => 25];
+        foreach ($anchos as $col => $ancho) {
+            $sheet->getColumnDimension($col)->setWidth($ancho);
+        }
+
+        // ── Hoja de instrucciones ──
+        $instrucciones = $spreadsheet->createSheet();
+        $instrucciones->setTitle('Instrucciones');
+
+        $textos = [
+            ['A1', 'INSTRUCCIONES PARA LA IMPORTACIÓN DE ARTÍCULOS'],
+            ['A3', '1. Use la hoja "Plantilla Artículos" para llenar los datos.'],
+            ['A4', '2. La fila 1 contiene los encabezados. NO los modifique.'],
+            ['A5', '3. La fila 2 tiene datos de ejemplo. Elimínela o reemplácela con sus datos reales.'],
+            ['A6', '4. Comience a llenar desde la fila 2 (o 3 si conserva el ejemplo).'],
+            ['A8', 'COLUMNAS OBLIGATORIAS:'],
+            ['A9', '   • codigo: Código único del artículo dentro de la bodega.'],
+            ['A10', '   • nombre: Nombre del artículo.'],
+            ['A11', '   • stock: Cantidad en existencia (número entero ≥ 0).'],
+            ['A12', '   • categoria: Nombre exacto de la categoría (debe existir en el sistema).'],
+            ['A13', '   • tipo_producto: Nombre exacto del tipo de producto (debe existir en el sistema).'],
+            ['A14', '   • unidad_medida: Nombre exacto de la unidad de medida (debe existir en el sistema).'],
+            ['A15', '   • departamento: Nombre exacto del departamento (debe existir en el sistema).'],
+            ['A17', 'COLUMNAS OPCIONALES:'],
+            ['A18', '   • descripcion: Descripción del artículo.'],
+            ['A19', '   • bodega: Nombre de la bodega destino. Si su usuario tiene bodega asignada, se ignora esta columna.'],
+            ['A21', 'NOTAS:'],
+            ['A22', '   • Los nombres de categoría, tipo, unidad, departamento y bodega deben coincidir con los registrados en el sistema.'],
+            ['A23', '   • No importa si usa mayúsculas o minúsculas; el sistema los convertirá automáticamente.'],
+            ['A24', '   • Si un código ya existe en la misma bodega, esa fila será omitida como duplicado.'],
+            ['A25', '   • Tamaño máximo del archivo: 5 MB.'],
+            ['A26', '   • Formatos aceptados: .xlsx, .xls'],
+        ];
+
+        foreach ($textos as [$celda, $texto]) {
+            $instrucciones->setCellValue($celda, $texto);
+        }
+
+        $instrucciones->getStyle('A1')->getFont()->setBold(true)->setSize(14)->getColor()->setRGB('198754');
+        $instrucciones->getStyle('A8')->getFont()->setBold(true);
+        $instrucciones->getStyle('A17')->getFont()->setBold(true);
+        $instrucciones->getStyle('A21')->getFont()->setBold(true);
+        $instrucciones->getColumnDimension('A')->setWidth(90);
+
+        // Volver a la primera hoja
+        $spreadsheet->setActiveSheetIndex(0);
+
+        // ── Descargar ──
+        $filename = 'plantilla_importacion_articulos.xlsx';
+        $temp = tempnam(sys_get_temp_dir(), 'plantilla_');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($temp);
+
+        return response()->download($temp, $filename, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ])->deleteFileAfterSend(true);
     }
 }
