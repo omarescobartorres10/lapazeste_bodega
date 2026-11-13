@@ -40,9 +40,9 @@
             margin-top: 5px;
         }
 
-        /* Info Box (Solicitante, Depto, etc) */
+        /* Info Box (Recibido por, Depto, etc) */
         .info-table { width: 100%; margin-bottom: 20px; border-collapse: collapse; }
-        .info-table td { padding: 3px 0; border-bottom: 1px solid #000; }
+        .info-table td { padding: 4px 0; border-bottom: 1px solid #000; }
         .info-label { width: 15%; font-weight: bold; text-transform: uppercase; }
         .info-colon { width: 2%; }
         
@@ -53,14 +53,14 @@
         .items-table .totals { text-align: right; font-weight: bold; border: none; padding-top: 10px; }
 
         /* Sección de Firmas */
-        .signatures-table { width: 100%; margin-top: 70px; text-align: center; border-collapse: collapse; }
+        .signatures-table { width: 100%; margin-top: 80px; text-align: center; border-collapse: collapse; }
         .signatures-table td { width: 50%; vertical-align: bottom; }
         .signature-line { border-bottom: 1px solid #000; width: 80%; margin: 0 auto; margin-bottom: 5px; }
         .signature-name { font-weight: bold; text-transform: uppercase; font-size: 11px; }
         .signature-role { font-size: 10px; margin-top: 2px; }
         
         /* Footer */
-        .footer { margin-top: 50px; text-align: right; font-size: 9px; border-top: 1px solid #ccc; padding-top: 5px; }
+        .footer { margin-top: 60px; text-align: right; font-size: 9px; border-top: 1px solid #ccc; padding-top: 5px; }
     </style>
 </head>
 <body>
@@ -142,7 +142,7 @@
                 </tr>
             @endforeach
             
-            {{-- Fila de totales (simulando el recuadro del formato oficial) --}}
+            {{-- Fila de totales --}}
             <tr>
                 <td colspan="6" class="totals" style="border-top: 1px solid #000;">
                     Productos diferentes: {{ $items->count() }} &nbsp;&nbsp;|&nbsp;&nbsp; 
@@ -152,13 +152,6 @@
         </tbody>
     </table>
 
-    {{-- 🔹 OBSERVACIONES GENERALES --}}
-    <div style="margin-top: 20px;">
-        <strong>OBSERVACIONES / DESCRIPCIÓN DE USO:</strong>
-        <div style="border: 1px solid #000; height: 40px; padding: 5px; margin-top: 5px;">
-            <!-- Aquí puedes poner alguna variable si tienes una observación general -->
-        </div>
-    </div>
 
     {{-- 🔹 FIRMAS --}}
     <table class="signatures-table">
