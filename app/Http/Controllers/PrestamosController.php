@@ -222,12 +222,18 @@ class PrestamosController extends Controller
 
         try {
             foreach ($items as $item) {
+                $prestamo = Prestamo::with('producto')->lockForUpdate()->findOrFail($item['id']);
+                
+                // 🛡️ PROTECCIÓN 1: Evitar devolver préstamos ya finalizados
+                if ($prestamo->estado === 'devuelto' || $prestamo->estado === 'cancelado') {
+                    throw new \Exception("El préstamo del producto {$prestamo->producto->nombre} ya fue devuelto o cancelado previamente.");
+                }
 
-                $prestamo = Prestamo::with('producto')->findOrFail($item['id']);
                 $pendiente = $prestamo->cantidad - $prestamo->cantidad_devuelta;
 
+                // 🛡️ PROTECCIÓN 2: Validar que no devuelvan más de lo pendiente
                 if ($item['devolver'] > $pendiente) {
-                    throw new \Exception("La cantidad supera lo pendiente del producto {$prestamo->producto->nombre}");
+                    throw new \Exception("La cantidad a devolver supera lo pendiente del producto {$prestamo->producto->nombre}");
                 }
 
                 if ($item['devolver'] > 0) {
@@ -235,6 +241,7 @@ class PrestamosController extends Controller
                     $prestamo->producto->increment('stock', $item['devolver']);
                 }
 
+                // Actualizar estado
                 if ($prestamo->cantidad_devuelta == $prestamo->cantidad) {
                     $prestamo->estado = 'devuelto';
                     $prestamo->fecha_devolucion = now();
