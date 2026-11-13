@@ -501,6 +501,11 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
 
+        // 🛡️ PROTECCIÓN: Validar que el producto pertenezca a la bodega del usuario
+        if (Auth::user()->bodega_id && $producto->bodega_id !== Auth::user()->bodega_id) {
+            return back()->with('error', 'No puedes modificar productos de otra bodega.');
+        }
+
         $producto->estado = !$producto->estado;
 
         $producto->save();
@@ -541,6 +546,11 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
 
+        // 🛡️ PROTECCIÓN: Validar que el producto pertenezca a la bodega del usuario
+        if (Auth::user()->bodega_id && $producto->bodega_id !== Auth::user()->bodega_id) {
+            return back()->with('error', 'No puedes modificar productos de otra bodega.');
+        }
+
         $producto->estado = 1;
 
         $producto->save();
@@ -574,6 +584,11 @@ class ProductoController extends Controller
     public function desactivar(Request $request, $id)
     {
         $producto = Producto::findOrFail($id);
+
+        // 🛡️ PROTECCIÓN: Validar que el producto pertenezca a la bodega del usuario
+        if (Auth::user()->bodega_id && $producto->bodega_id !== Auth::user()->bodega_id) {
+            return back()->with('error', 'No puedes modificar productos de otra bodega.');
+        }
 
         $producto->estado = 0;
 
@@ -669,6 +684,7 @@ class ProductoController extends Controller
     public function todos()
     {
         try {
+            $user = Auth::user();
 
             $productos = Producto::with([
                 'categoria',
@@ -677,6 +693,8 @@ class ProductoController extends Controller
                 'tipoProducto',
                 'unidades'
             ])
+            // 🛡️ FILTRO: Si el usuario tiene bodega, solo le mostramos su bodega
+            ->when($user->bodega_id, fn($q) => $q->where('bodega_id', $user->bodega_id))
             ->orderBy('nombre', 'asc')
             ->paginate(5);
 

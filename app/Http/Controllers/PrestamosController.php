@@ -65,6 +65,11 @@ class PrestamosController extends Controller
 
                 $producto = Producto::lockForUpdate()->findOrFail($item['producto_id']);
 
+                // 🛡️ PROTECCIÓN: Validar que el producto pertenezca a la bodega del usuario
+                if (Auth::user()->bodega_id && $producto->bodega_id !== Auth::user()->bodega_id) {
+                    throw new \Exception("No tienes permiso para realizar préstamos de productos de otra bodega.");
+                }
+
                 if ($producto->stock < $item['cantidad']) {
                     throw new \Exception("No hay suficiente stock para el producto: {$producto->nombre}");
                 }

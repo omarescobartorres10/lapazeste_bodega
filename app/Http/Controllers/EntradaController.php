@@ -90,6 +90,13 @@ class EntradaController extends Controller
                     throw new \Exception('Debe seleccionar una bodega válida.');
                 }
 
+                $producto = Producto::findOrFail($item['producto_id']);
+
+                // 🛡️ PROTECCIÓN: Validar que el producto pertenezca a la bodega del usuario
+                if (Auth::user()->bodega_id && $producto->bodega_id !== Auth::user()->bodega_id) {
+                    throw new \Exception("No tienes permiso para modificar el stock de esta bodega.");
+                }
+
                 Entrada::create([
                     'departamento_id' => $item['departamento_id'],
                     'categoria_id' => $item['categoria_id'],
@@ -106,8 +113,7 @@ class EntradaController extends Controller
                     'factura_pdf' => $pdfPath,
                 ]);
 
-                Producto::findOrFail($item['producto_id'])
-                    ->increment('stock', $item['cantidad']);
+                $producto->increment('stock', $item['cantidad']);
             }
 
             DB::commit();
