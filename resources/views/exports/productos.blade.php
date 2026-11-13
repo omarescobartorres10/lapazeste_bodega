@@ -1,8 +1,8 @@
 <table>
     <thead>
         <tr>
-            <th colspan="10" style="text-align:center; font-weight:bold; font-size:16px;">
-                REPORTE DE PRODUCTOS {{ isset($user->bodega) ? ' - ' . strtoupper($user->bodega->nombre) : '' }}
+            <th colspan="10">
+                REPORTE DE PRODUCTOS {{ isset($user->bodega) ? ' - ' . strtoupper($user->bodega->nombre) : ' - TODAS LAS BODEGAS' }}
             </th>
         </tr>
         <tr>
@@ -19,18 +19,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($productos as $p)
+        @foreach ($productos as $producto)
             <tr>
-                <td>{{ $p->codigo }}</td>
-                <td>{{ $p->nombre }}</td>
-                <td>{{ $p->descripcion }}</td>
-                <td>{{ $p->bodega->nombre ?? '—' }}</td>
-                <td>{{ $p->stock }}</td>
-                <td>{{ $p->unidades->nombre ?? '—' }}</td>
-                <td>{{ $p->categoria->nombre ?? '—' }}</td>
-                <td>{{ $p->departamento->nombre ?? '—' }}</td>
-                <td>{{ $p->tipoProducto->nombre ?? '—' }}</td>
-                <td>{{ $p->estado ? 'Activo' : 'Inactivo' }}</td>
+                <td>{{ $producto->codigo }}</td>
+                <td>{{ $producto->nombre }}</td>
+                <td>{{ $producto->descripcion ?? '—' }}</td>
+                <td>{{ $producto->bodega->nombre ?? '—' }}</td>
+                <td>{{ $producto->stock }}</td>
+                <td>{{ $producto->unidades->nombre ?? '—' }}</td>
+                <td>{{ $producto->categoria->nombre ?? '—' }}</td>
+                <td>{{ $producto->departamento->nombre ?? '—' }}</td>
+                <td>{{ $producto->tipoProducto->nombre ?? '—' }}</td>
+                <td>{{ $producto->estado ? 'Activo' : 'Inactivo' }}</td>
             </tr>
         @endforeach
     </tbody>
