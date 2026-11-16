@@ -56,6 +56,7 @@ class BajaController extends Controller
 
             $contador = Baja::whereDate('created_at', now()->toDateString())
                 ->distinct('codigo_operacion')
+                ->lockShared()
                 ->count();
 
             $correlativo     = str_pad($contador + 1, 4, '0', STR_PAD_LEFT);
