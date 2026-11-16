@@ -46,7 +46,7 @@
                 <a class="collapse-item" href="{{ route('categorias') }}"><i class="fas fa-tags"></i> Categorías</a>
 
                 @auth
-                    @if(!Auth::user()->bodega)
+                    @if(Auth::user()->rol === 'admin')
                         <a class="collapse-item" href="{{ route('usuarios') }}">
                             <i class="fas fa-users-cog"></i> Usuarios
                         </a>

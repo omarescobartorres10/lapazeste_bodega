@@ -60,9 +60,9 @@ Route::middleware('auth')->group(function () {
     /* ===================== USUARIOS ===================== */
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
-    Route::put('/update/{id}', [UserController::class, 'update'])->name('usuarios.update');
-    Route::put('/toggle/{id}', [UserController::class, 'toggleEstado'])->name('usuarios.toggle');
-    Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+    Route::put('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
+    Route::put('/usuarios/{id}/toggle', [UserController::class, 'toggleEstado'])->name('usuarios.toggle');
+    Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
 
     /* ===================== PRODUCTOS ===================== */
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos');

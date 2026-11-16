@@ -126,7 +126,7 @@
 
             {{-- BOTONES DE ACCIÓN --}}
             @auth
-                @if(!Auth::user()->bodega)
+                @if(Auth::user()->rol === 'admin')
                     @if($solicitud->estado == 'pendiente')
                     <div class="mt-4">
 

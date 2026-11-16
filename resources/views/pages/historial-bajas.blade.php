@@ -150,9 +150,9 @@
                                         <i class="bi bi-file-earmark-pdf"></i>
                                     </a>
 
-                                    {{-- 🔴 Cancelar operación --}}                                    
+                                    {{-- 🔴 Cancelar operación --}}
                                     @auth
-                                        @if(!Auth::user()->bodega && $baj->estado == 1)
+                                        @if(Auth::user()->rol === 'admin' && $baj->estado == 1)
                                             <button class="btn-circle-solid btn-red cancelar-baja"
                                                 data-codigo="{{ $baj->codigo_operacion }}">
                                                 <i class="bi bi-x-lg"></i>

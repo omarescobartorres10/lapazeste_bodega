@@ -28,9 +28,9 @@ class User extends Authenticatable
         return $this->belongsTo(Bodega::class);
     }
 
-    // 🔹 Saber si el usuario es "admin global"
+    // 🔹 Saber si el usuario es administrador
     public function esAdminGlobal(): bool
     {
-        return $this->bodega_id === null;
+        return $this->rol === 'admin';
     }
 }

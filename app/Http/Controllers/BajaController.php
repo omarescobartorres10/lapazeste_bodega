@@ -173,13 +173,11 @@ class BajaController extends Controller
     {
         $user = Auth::user();
 
-        // ✔ Si NO tiene bodega => es admin
-        $esAdmin = !$user->bodega_id;
-
-        if (!$esAdmin) {
+        // ✔ Solo los administradores pueden cancelar bajas
+        if ($user->rol !== 'admin') {
             return response()->json([
                 'success' => false,
-                'message' => 'Solo un usuario sin bodega asignada puede cancelar bajas.'
+                'message' => 'Solo un administrador puede cancelar bajas.'
             ], 403);
         }
 
