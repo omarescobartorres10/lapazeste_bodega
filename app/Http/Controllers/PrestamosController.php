@@ -127,7 +127,7 @@ class PrestamosController extends Controller
                 DB::raw('SUM(cantidad_devuelta) as total_devuelto'),
                 DB::raw('MAX(bodega_id)         as bodega_id'),
                 DB::raw('MAX(departamento_id)   as departamento_id'),
-                DB::raw('MAX(estado)            as estado')
+                DB::raw('MIN(estado)            as estado')
             )
             ->when($bodegaUser, fn($q) => $q->where('bodega_id', $bodegaUser))
             ->when($desde, fn($q) => $q->whereDate('created_at', '>=', $desde))

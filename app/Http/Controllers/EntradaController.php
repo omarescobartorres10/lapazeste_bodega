@@ -68,12 +68,12 @@ class EntradaController extends Controller
             'factura_pdf.mimes' => 'La factura debe ser un archivo PDF.',
         ]);
 
+        $facturaPdf = $request->file('factura_pdf');
+        $pdfPath = null;
+
         DB::beginTransaction();
 
         try {
-            $facturaPdf = $request->file('factura_pdf');
-            $pdfPath = $facturaPdf?->store('facturas', 'public');
-
             $fecha = now()->format('dmY');
 
             $contador = Entrada::whereDate('created_at', now()->toDateString())
@@ -118,10 +118,23 @@ class EntradaController extends Controller
 
             DB::commit();
 
+            // Guardar el PDF solo después de confirmar la transacción
+            if ($facturaPdf) {
+                $pdfPath = $facturaPdf->store('facturas', 'public');
+                // Actualizar el path en los registros ya guardados
+                Entrada::where('codigo_operacion', $codigoOperacion)
+                    ->update(['factura_pdf' => $pdfPath]);
+            }
+
             return redirect()->route('entradas')
                 ->with('success', '✅ Entradas registradas correctamente.');
         } catch (\Throwable $e) {
             DB::rollBack();
+
+            // Si el PDF se subió antes del commit, limpiarlo
+            if ($pdfPath) {
+                Storage::disk('public')->delete($pdfPath);
+            }
 
             return back()->with('error', '⚠️ Error al registrar entrada: ' . $e->getMessage());
         }
@@ -237,7 +250,7 @@ class EntradaController extends Controller
                 DB::raw('COUNT(*) as total_productos'),
                 DB::raw('MAX(bodega_id) as bodega_id'),
                 DB::raw('MAX(departamento_id) as departamento_id'),
-                DB::raw('MAX(estado) as estado'),
+                DB::raw('MIN(estado) as estado'),
                 DB::raw('MAX(factura_pdf) as factura_pdf')
             )
             ->when($bodegaUser, fn($q) => $q->where('bodega_id', $bodegaUser))

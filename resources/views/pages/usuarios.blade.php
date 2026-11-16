@@ -44,7 +44,7 @@
                             @foreach ($usuarios as $usuario)
                                 <tr>
                                     <td class="fw-semibold">{{ $usuario->nombre }}</td>
-                                    <td><code>{{ $usuario->usuario }}</code></td>
+                                    <td class="fw-bold">{{ $usuario->usuario }}</td>
                                     <td>
                                         <span class="badge {{ $usuario->rol === 'admin' ? 'bg-primary' : 'bg-success' }} px-3 py-2 rounded-pill">
                                             <i class="bi {{ $usuario->rol === 'admin' ? 'bi-shield-check' : 'bi-shop' }} me-1"></i>
@@ -53,7 +53,7 @@
                                     </td>
                                     <td>
                                         @if($usuario->rol === 'admin')
-                                            <span class="text-muted"><i class="bi bi-infinity me-1"></i>Todas (Global)</span>
+                                            <span class="text-muted">Todas (Global)</span>
                                         @else
                                             <span class="fw-semibold text-success">
                                                 <i class="bi bi-building me-1"></i>{{ $usuario->bodega->nombre ?? 'Sin asignar' }}
