@@ -233,14 +233,14 @@
             const buscarInput = document.getElementById('buscarInput');
             const btnLimpiarBusqueda = document.getElementById('btnLimpiarBusqueda');
 
-            if (formBusqueda && buscarInput) { 
+            if (formBusqueda && buscarInput) {
                 formBusqueda.addEventListener('submit', e => {
+                    e.preventDefault();
                     const termino = buscarInput.value.trim();
                     buscarInput.value = termino;
-
-                    if (termino === '') {
-                        e.preventDefault();
-                        window.location.href = formBusqueda.action;
+                    // Usar AJAX siempre, sin recargar la página
+                    if (typeof window.cargarProductos === 'function') {
+                        window.cargarProductos(1);
                     }
                 });
             }
@@ -248,8 +248,10 @@
             if (btnLimpiarBusqueda && formBusqueda && buscarInput) {
                 btnLimpiarBusqueda.addEventListener('click', () => {
                     buscarInput.value = '';
-                    const url = new URL(formBusqueda.action, window.location.origin);
-                    window.location.href = url.toString();
+                    // Usar AJAX siempre, sin recargar la página
+                    if (typeof window.cargarProductos === 'function') {
+                        window.cargarProductos(1);
+                    }
                 });
             }
         });
@@ -338,6 +340,15 @@
                     cargarConsulta(1);
                 });
             }
+
+            // 🔍 BÚSQUEDA EN TIEMPO REAL CON DEBOUNCE
+            let debounceTimer;
+            inputBuscar.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    cargarConsulta(1);
+                }, 500);
+            });
 
             btnBuscar.addEventListener('click', () => cargarConsulta(1));
             filtroBodega.addEventListener('change', () => cargarConsulta(1));
@@ -445,9 +456,11 @@
             const paginacionContainer = document.getElementById('paginacion-container');
             const selectBodega = document.getElementById('filtroBodega');
             const selectDepartamento = document.getElementById('filtroDepartamento');
+            const buscarInput = document.getElementById('buscarInput');
 
             const bodegaId = selectBodega ? selectBodega.value : '';
             const departamentoId = selectDepartamento ? selectDepartamento.value : '';
+            const buscar = buscarInput ? buscarInput.value.trim() : '';
 
             let url = `/productos/todos?page=${page}`;
             
@@ -456,6 +469,11 @@
                 url = `/productos/departamento/${departamentoId}?page=${page}`;
             } else if (bodegaId) {
                 url = `/productos/bodega/${bodegaId}?page=${page}`;
+            }
+
+            // Agregar parámetro de búsqueda si existe
+            if (buscar) {
+                url += `&buscar=${encodeURIComponent(buscar)}`;
             }
 
             if (loader) loader.style.display = 'block';
@@ -571,6 +589,20 @@
                 if (guardada) selectDepartamento.value = guardada;
             }
 
+            // 🔍 BÚSQUEDA EN TIEMPO REAL CON DEBOUNCE (siempre AJAX, sin recargar)
+            let debounceTimer;
+            if (buscarInput) {
+                buscarInput.addEventListener('input', () => {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        // Siempre usar AJAX, sin importar si hay filtros activos
+                        if (typeof window.cargarProductos === 'function') {
+                            window.cargarProductos(1);
+                        }
+                    }, 500);
+                });
+            }
+
             // EVENTO: Cambio en Bodega
             if (selectBodega) {
                 selectBodega.addEventListener('change', () => {
@@ -615,8 +647,8 @@
                 });
             }
 
-            // Carga inicial (solo si no hay búsqueda activa por URL)
-            if (!busquedaActiva) {
+            // Carga inicial: siempre usar AJAX (incluso si hay búsqueda activa por URL)
+            if (typeof window.cargarProductos === 'function') {
                 window.cargarProductos(1);
             }
         });

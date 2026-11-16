@@ -627,7 +627,7 @@ class ProductoController extends Controller
      * PRODUCTOS POR BODEGA
      * ================================================================
      */
-    public function porBodega($id)
+    public function porBodega($id, Request $request)
     {
         try {
             $user = Auth::user();
@@ -637,16 +637,25 @@ class ProductoController extends Controller
                 return response()->json(['error' => 'No autorizado'], 403);
             }
 
-            $productos = Producto::with([
+            $query = Producto::with([
                 'categoria',
                 'departamento',
                 'bodega',
                 'tipoProducto',
                 'unidades'
             ])
-            ->where('bodega_id', $id)
-            ->orderBy('nombre', 'asc')
-            ->paginate(5);
+            ->where('bodega_id', $id);
+
+            // 🔍 Buscador
+            if ($request->filled('buscar')) {
+                $buscar = trim($request->buscar);
+                $query->where(function ($q) use ($buscar) {
+                    $q->where('nombre', 'like', "%{$buscar}%")
+                      ->orWhere('codigo', 'like', "%{$buscar}%");
+                });
+            }
+
+            $productos = $query->orderBy('nombre', 'asc')->paginate(5);
 
             return response()->json(
                 $productos
@@ -667,7 +676,7 @@ class ProductoController extends Controller
         }
     }
 
-        public function porDepartamento($id)
+        public function porDepartamento($id, Request $request)
     {
         $user = Auth::user();
 
@@ -684,6 +693,15 @@ class ProductoController extends Controller
             $query->where('bodega_id', $user->bodega_id);
         }
 
+        // 🔍 Buscador
+        if ($request->filled('buscar')) {
+            $buscar = trim($request->buscar);
+            $query->where(function ($q) use ($buscar) {
+                $q->where('nombre', 'like', "%{$buscar}%")
+                  ->orWhere('codigo', 'like', "%{$buscar}%");
+            });
+        }
+
         return response()->json(
             $query->orderBy('nombre', 'asc')->paginate(5)
         );
@@ -694,12 +712,12 @@ class ProductoController extends Controller
      * TODOS LOS PRODUCTOS
      * ================================================================
      */
-    public function todos()
+    public function todos(Request $request)
     {
         try {
             $user = Auth::user();
 
-            $productos = Producto::with([
+            $query = Producto::with([
                 'categoria',
                 'departamento',
                 'bodega',
@@ -707,9 +725,18 @@ class ProductoController extends Controller
                 'unidades'
             ])
             // 🛡️ FILTRO: Si el usuario tiene bodega, solo le mostramos su bodega
-            ->when($user->bodega_id, fn($q) => $q->where('bodega_id', $user->bodega_id))
-            ->orderBy('nombre', 'asc')
-            ->paginate(5);
+            ->when($user->bodega_id, fn($q) => $q->where('bodega_id', $user->bodega_id));
+
+            // 🔍 Buscador
+            if ($request->filled('buscar')) {
+                $buscar = trim($request->buscar);
+                $query->where(function ($q) use ($buscar) {
+                    $q->where('nombre', 'like', "%{$buscar}%")
+                      ->orWhere('codigo', 'like', "%{$buscar}%");
+                });
+            }
+
+            $productos = $query->orderBy('nombre', 'asc')->paginate(5);
 
             return response()->json(
                 $productos
