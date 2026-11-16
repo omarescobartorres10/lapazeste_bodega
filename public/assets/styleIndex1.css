@@ -16,7 +16,14 @@
 }
 
 .sidebar .nav-link i {
-    margin-right: 10px;
+    margin-right: 12px;
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+}
+
+.sidebar .nav-link span {
+    margin-left: 4px;
 }
 
 /* Hover */
@@ -73,7 +80,16 @@
     }
 
     .sidebar.toggled {
-        width: 250px;
+        width: 260px;
+    }
+
+    .sidebar.toggled .nav-link {
+        justify-content: start;
+        padding: 14px 22px;
+    }
+
+    .sidebar.toggled .nav-link i {
+        margin-right: 14px;
     }
 
     .sidebar.toggled .nav-link span,
@@ -81,10 +97,6 @@
     .sidebar.toggled .sidebar-heading1,
     .sidebar.toggled .sidebar-brand-text {
         display: inline;
-    }
-
-    .sidebar.toggled .nav-link {
-        justify-content: start;
     }
 }
 

@@ -34,24 +34,26 @@
             <hr>
             <h5>Productos Solicitados</h5>
 
-            <table class="table table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Observación</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($solicitud->detalles as $d)
-                    <tr>
-                        <td>{{ $d->producto->nombre }}</td>
-                        <td>{{ $d->cantidad }}</td>
-                        <td>{{ $d->observacion }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Observación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($solicitud->detalles as $d)
+                        <tr>
+                            <td>{{ $d->producto->nombre }}</td>
+                            <td>{{ $d->cantidad }}</td>
+                            <td>{{ $d->observacion }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             <div class="text-center mt-4">
                 <a href="{{ route('public.consultar') }}" class="btn btn-secondary">

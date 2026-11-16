@@ -198,20 +198,22 @@
             </div>
 
             <div class="modal-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Categoría</th>
-                            <th>Dpto</th>
-                            <th>Prestado</th>
-                            <th>Devuelto</th>
-                            <th>Pendiente</th>
-                            <th>Obs</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-detalle"></tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Dpto</th>
+                                <th>Prestado</th>
+                                <th>Devuelto</th>
+                                <th>Pendiente</th>
+                                <th>Obs</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-detalle"></tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
@@ -238,18 +240,20 @@
                         Ingrese la cantidad a devolver por cada producto (no puede superar lo pendiente).
                     </p>
 
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Prestado</th>
-                                <th>Devuelto</th>
-                                <th>Pendiente</th>
-                                <th>Devolver ahora</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-parcial"></tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Prestado</th>
+                                    <th>Devuelto</th>
+                                    <th>Pendiente</th>
+                                    <th>Devolver ahora</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-parcial"></tbody>
+                        </table>
+                    </div>
 
                 </div>
 

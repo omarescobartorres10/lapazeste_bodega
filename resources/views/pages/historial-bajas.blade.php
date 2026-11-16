@@ -200,17 +200,19 @@
             </div>
 
             <div class="modal-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Categoría</th>
-                            <th>Departamento</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-detalle"></tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Departamento</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-detalle"></tbody>
+                    </table>
+                </div>
             </div>
 
         </div>

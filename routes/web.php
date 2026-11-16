@@ -45,13 +45,9 @@ Route::post('/sesion/actividad', function (Illuminate\Http\Request $request) {
     return response()->noContent();
 })->name('sesion.actividad');
 
-// Opcional: si aún lo necesitas como GET (no recomendado, pero lo dejo)
-Route::get('/logout', [LoginController::class, 'logout']);
-
 /* ============================================================
-   VALIDAR CÓDIGO / USUARIOS (FUERA AUTH)
+   VALIDAR CÓDIGO (FUERA AUTH)
 ============================================================ */
-// Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
 Route::post('/validar-codigo', [CodigoController::class, 'validar'])->name('codigo.validar');
 
 /* ============================================================

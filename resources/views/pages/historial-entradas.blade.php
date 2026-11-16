@@ -218,18 +218,20 @@
             </div>
 
             <div class="modal-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Categoría</th>
-                            <th>Dpto</th>
-                            <th>Cantidad</th>
-                            <th>Obs</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-detalle"></tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Dpto</th>
+                                <th>Cantidad</th>
+                                <th>Obs</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-detalle"></tbody>
+                    </table>
+                </div>
             </div>
 
         </div>

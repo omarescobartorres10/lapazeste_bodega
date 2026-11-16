@@ -75,24 +75,26 @@
                 Productos solicitados:
             </div>
 
-            <table class="table table-bordered" style="font-size:14px;">
-                <thead>
-                    <tr style="background:#004d66; color:white;">
-                        <th>PRODUCTO</th>
-                        <th style="width:120px;">CANTIDAD</th>
-                        <th>OBSERVACIÓN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($solicitud->detalles as $item)
-                    <tr>
-                        <td>{{ $item->producto->nombre }}</td>
-                        <td class="text-center"><strong>{{ $item->cantidad }}</strong></td>
-                        <td>{{ $item->observacion }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered" style="font-size:14px;">
+                    <thead>
+                        <tr style="background:#004d66; color:white;">
+                            <th>PRODUCTO</th>
+                            <th style="width:120px;">CANTIDAD</th>
+                            <th>OBSERVACIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($solicitud->detalles as $item)
+                        <tr>
+                            <td>{{ $item->producto->nombre }}</td>
+                            <td class="text-center"><strong>{{ $item->cantidad }}</strong></td>
+                            <td>{{ $item->observacion }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             {{-- BOTÓN --}}
             <div class="text-end mt-4">

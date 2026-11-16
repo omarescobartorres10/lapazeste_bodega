@@ -102,7 +102,8 @@
         </div>
 
         <div class="card-body">
-            <table class="table table-bordered table-striped">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
                 <thead class="table-light">
                     <tr>
                         <th>Producto</th>
@@ -120,7 +121,8 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
+                </table>
+            </div>
 
             {{-- BOTONES DE ACCIÓN --}}
             @auth

@@ -163,19 +163,21 @@
             <div class="modal-body">
                 <div id="detalle-error" class="alert alert-danger d-none"></div>
 
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Producto Origen</th>
-                            <th>Producto Destino</th>
-                            <th>Bodega Origen</th>
-                            <th>Bodega Destino</th>
-                            <th>Cantidad</th>
-                            <th>Obs</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-detalle"></tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Producto Origen</th>
+                                <th>Producto Destino</th>
+                                <th>Bodega Origen</th>
+                                <th>Bodega Destino</th>
+                                <th>Cantidad</th>
+                                <th>Obs</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-detalle"></tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
