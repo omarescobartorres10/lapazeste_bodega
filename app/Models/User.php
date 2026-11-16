@@ -14,6 +14,7 @@ class User extends Authenticatable
         'nombre',
         'usuario',
         'password',
+        'rol',
         'bodega_id',
         'estado',
     ];

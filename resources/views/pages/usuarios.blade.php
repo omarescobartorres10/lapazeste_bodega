@@ -88,6 +88,14 @@
                                 <input type="password" name="password" class="form-control rounded-pill px-4" required placeholder="Mínimo 4 caracteres">
                             </div>
 
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Rol</label>
+                                <select name="rol" id="rolSelect" class="form-select rounded-pill px-4" required>
+                                    <option value="admin">Administrador</option>
+                                    <option value="encargado">Encargado</option>
+                                </select>
+                            </div>
+
                             <div class="col-md-12 mb-3" id="bodegaSelectContainer" style="display: none;">
                                 <label class="form-label fw-semibold">Asignar Bodega</label>
                                 <select name="bodega_id" class="form-select rounded-pill px-4">
@@ -128,6 +136,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Usuario</th>
+                                <th>Rol</th>
                                 <th>Bodega</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
@@ -138,6 +147,11 @@
                                 <tr>
                                     <td>{{ $usuario->nombre }}</td>
                                     <td>{{ $usuario->usuario }}</td>
+                                    <td>
+                                        <span class="badge {{ $usuario->rol == 'admin' ? 'bg-primary' : 'bg-success' }}">
+                                            {{ $usuario->rol == 'admin' ? 'Administrador' : 'Encargado' }}
+                                        </span>
+                                    </td>
                                     <td>{{ $usuario->bodega->nombre ?? '—' }}</td>
                                     <td>
                                         <span class="{{ $usuario->estado ? 'estado-activo' : 'estado-inactivo' }}">
@@ -242,10 +256,37 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-// Mostrar/ocultar campo de bodega según rol
-document.getElementById('rolSelect').addEventListener('change', function() {
-    const bodegaContainer = document.getElementById('bodegaSelectContainer');
-    bodegaContainer.style.display = this.value === 'encargado' ? 'block' : 'none';
+// Mostrar/ocultar campo de bodega según rol (modal Agregar)
+const rolSelect = document.getElementById('rolSelect');
+const bodegaContainer = document.getElementById('bodegaSelectContainer');
+if (rolSelect && bodegaContainer) {
+    rolSelect.addEventListener('change', function() {
+        bodegaContainer.style.display = this.value === 'encargado' ? 'block' : 'none';
+    });
+}
+
+// Mostrar/ocultar campo de bodega según rol (modales Editar)
+document.querySelectorAll('.rol-select').forEach(select => {
+    const modal = select.closest('.modal');
+    if (!modal) return;
+    const bodegaSelect = modal.querySelector('select[name="bodega_id"]');
+    const bodegaLabel = bodegaSelect ? bodegaSelect.closest('.col-md-12') : null;
+
+    const toggleBodega = () => {
+        if (bodegaLabel) {
+            bodegaLabel.style.display = select.value === 'encargado' ? 'block' : 'none';
+        }
+    };
+
+    // Estado inicial al abrir el modal
+    const observer = new MutationObserver(() => {
+        if (modal.classList.contains('show')) {
+            toggleBodega();
+        }
+    });
+    observer.observe(modal, { attributes: true, attributeFilter: ['class'] });
+
+    select.addEventListener('change', toggleBodega);
 });
 
 // Confirmación activar/desactivar

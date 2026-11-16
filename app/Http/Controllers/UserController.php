@@ -23,6 +23,7 @@ class UserController extends Controller
             'nombre' => 'required|string|max:255',
             'usuario' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:4',
+            'rol' => 'required|in:admin,encargado',
             'bodega_id' => 'nullable|exists:bodegas,id',
         ]);
 
@@ -30,6 +31,7 @@ class UserController extends Controller
             'nombre' => strtoupper($request->nombre),
             'usuario' => strtolower($request->usuario),
             'password' => Hash::make($request->password),
+            'rol' => $request->rol,
             'bodega_id' => $request->bodega_id ?: null,
             'estado' => 1,
         ]);
@@ -45,12 +47,14 @@ class UserController extends Controller
             'nombre' => 'required|string|max:255',
             'usuario' => 'required|string|max:255|unique:users,usuario,' . $user->id,
             'password' => 'nullable|string|min:4',
+            'rol' => 'required|in:admin,encargado',
             'bodega_id' => 'nullable|exists:bodegas,id',
         ]);
 
         $user->update([
             'nombre' => strtoupper($request->nombre),
             'usuario' => strtolower($request->usuario),
+            'rol' => $request->rol,
             'bodega_id' => $request->bodega_id ?: null,
         ]);
 

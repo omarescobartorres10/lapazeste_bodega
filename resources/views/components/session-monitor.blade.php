@@ -7,7 +7,20 @@
     const expire = () => {
         if (exiting) return;
         exiting = true;
-        window.location.replace(@json(session()->has('solicitante_id') ? route('solicitud.logout') : url('/logout')));
+        @if(session()->has('solicitante_id'))
+            window.location.replace("{{ route('solicitud.logout') }}");
+        @else
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ route('logout') }}';
+            const csrf = document.createElement('input');
+            csrf.type = 'hidden';
+            csrf.name = '_token';
+            csrf.value = '{{ csrf_token() }}';
+            form.appendChild(csrf);
+            document.body.appendChild(form);
+            form.submit();
+        @endif
     };
     const check = () => {
         if (Date.now() - lastActivity >= 30 * 60 * 1000) expire();
