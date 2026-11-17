@@ -54,10 +54,11 @@ class PrestamosController extends Controller
         try {
             $fecha = now()->format('dmY');
 
-            $contador = Prestamo::whereDate('created_at', now()->toDateString())
-                ->distinct('codigo_operacion')
-                ->lockShared()
-                ->count();
+            $resultado = Prestamo::whereDate('created_at', now()->toDateString())
+                ->selectRaw('COUNT(DISTINCT codigo_operacion) as contador')
+                ->lock(false)
+                ->first();
+            $contador = $resultado->contador ?? 0;
 
             $correlativo     = str_pad($contador + 1, 4, '0', STR_PAD_LEFT);
             $codigoOperacion = "PRE-{$fecha}-LPE-{$correlativo}";

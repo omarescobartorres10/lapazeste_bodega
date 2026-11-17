@@ -54,10 +54,11 @@ class BajaController extends Controller
             /** 🔥 GENERAR CÓDIGO OPERACIÓN */
             $fecha = now()->format('dmY');
 
-            $contador = Baja::whereDate('created_at', now()->toDateString())
-                ->distinct('codigo_operacion')
-                ->lockShared()
-                ->count();
+            $resultado = Baja::whereDate('created_at', now()->toDateString())
+                ->selectRaw('COUNT(DISTINCT codigo_operacion) as contador')
+                ->lock(false)
+                ->first();
+            $contador = $resultado->contador ?? 0;
 
             $correlativo     = str_pad($contador + 1, 4, '0', STR_PAD_LEFT);
             $codigoOperacion = "BAJ-{$fecha}-LPE-{$correlativo}";
