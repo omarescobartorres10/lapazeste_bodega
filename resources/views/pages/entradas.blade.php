@@ -120,14 +120,22 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold">Número de Factura</label>
                         <input type="text" name="numero_factura" class="form-control" maxlength="255" value="{{ old('numero_factura') }}" required>
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold">Número de Orden de Compra</label>
                         <input type="text" name="numero_orden_compra" class="form-control" maxlength="255" value="{{ old('numero_orden_compra') }}" required>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-file-earmark-pdf me-1 text-danger"></i> Factura PDF <small class="text-muted">(opcional)</small>
+                        </label>
+                        <input type="file" name="factura_pdf" class="form-control" accept=".pdf">
+                        <small class="text-muted">Máximo 10 MB. Formato PDF.</small>
                     </div>
                 </div>
 

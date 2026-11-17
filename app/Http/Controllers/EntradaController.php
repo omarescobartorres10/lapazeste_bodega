@@ -61,10 +61,9 @@ class EntradaController extends Controller
             'productos.*.observacion' => 'nullable|string|max:255',
             'numero_factura' => 'required|string|max:255',
             'numero_orden_compra' => 'required|string|max:255',
-            'factura_pdf' => 'required|file|mimes:pdf|max:10240',
+            'factura_pdf' => 'nullable|file|mimes:pdf|max:10240',
         ], [
             'factura_pdf.max' => 'El PDF no debe pesar más de 10 MB.',
-            'factura_pdf.required' => 'Debe adjuntar la factura en PDF.',
             'factura_pdf.mimes' => 'La factura debe ser un archivo PDF.',
         ]);
 
