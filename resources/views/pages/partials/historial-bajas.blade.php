@@ -59,8 +59,8 @@
             </table>
         </div>
 
-        <div class="d-flex justify-content-end">
-            {{ $bajas->links() }}
+        <div class="d-flex justify-content-center mt-3">
+            {{ $bajas->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </div>

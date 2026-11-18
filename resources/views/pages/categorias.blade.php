@@ -290,20 +290,10 @@
         </div>
     </div>
 
-    <!-- Paginación con botones de siguiente y atrás -->
-    <div class="row mt-4">
-        <div class="col-12 col-md-6 mb-2 mb-md-0">
-            <p class="mb-0">
-                Mostrando {{ $categorias->firstItem() }} a {{ $categorias->lastItem() }} de {{ $categorias->total() }} categorias
-            </p>
-        </div>
-
-        <div class="col-12 col-md-6">
-            <div class="d-flex justify-content-md-end justify-content-center">
-                {{ $categorias->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
-            </div>
-        </div>
-    </div> 
+    <!-- Paginación -->
+    <div class="d-flex justify-content-center mt-3">
+        {{ $categorias->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
+    </div>
 </div>
 
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055;">

@@ -178,20 +178,8 @@
             </div>
 
             {{-- PAGINACIÓN --}}
-            <div class="row mt-4 px-3">
-                <div class="col-12 col-md-6 mb-2 mb-md-0">
-                    <p class="text-muted">
-                        Mostrando <strong>{{ $solicitantes->firstItem() }}</strong> a
-                        <strong>{{ $solicitantes->lastItem() }}</strong> de
-                        <strong>{{ $solicitantes->total() }}</strong> solicitantes
-                    </p>
-                </div>
-
-                <div class="col-12 col-md-6">
-                    <div class="d-flex justify-content-md-end justify-content-center">
-                        {{ $solicitantes->appends(request()->query())->links('pagination::bootstrap-5') }}
-                    </div>
-                </div>
+            <div class="d-flex justify-content-center mt-3">
+                {{ $solicitantes->appends(request()->query())->links('pagination::bootstrap-5') }}
             </div>
 
             @endif

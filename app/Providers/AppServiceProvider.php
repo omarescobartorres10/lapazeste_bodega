@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Solicitud;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,8 @@ class AppServiceProvider extends ServiceProvider
     
     public function boot()
     {
+        Paginator::useBootstrapFive();
+
         view()->composer('components.navigation-menu', function ($view) {
 
             $user = Auth::user();

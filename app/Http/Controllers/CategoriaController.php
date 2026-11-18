@@ -12,7 +12,10 @@ class CategoriaController extends Controller
     {
         $categorias = Categoria::when($request->buscar, function($query) use ($request) {
             return $query->where('nombre', 'like', '%' . $request->buscar . '%');
-        })->paginate(2);       
+        })
+        ->orderBy('id', 'desc')
+        ->paginate(10)
+        ->withQueryString();       
 
         return view('pages.categorias', compact('categorias'));
     }

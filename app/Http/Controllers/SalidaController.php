@@ -137,7 +137,8 @@ class SalidaController extends Controller
             ->when($hasta, fn($q) => $q->whereDate('created_at', '<=', $hasta))
             ->groupBy('codigo_operacion', 'destino', 'recibido_por', 'entregado_por')
             ->orderByDesc('fecha')
-            ->paginate(15);
+            ->paginate(15)
+            ->withQueryString();
 
         $bodegas = Bodega::pluck('nombre', 'id');
         $departamentos = Departamento::pluck('nombre', 'id');

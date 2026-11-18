@@ -20,7 +20,7 @@ class DepartamentoController extends Controller
                          ->orWhere('encargado', 'like', "%{$buscar}%");
         })
         ->orderBy('id', 'desc')
-        ->paginate(10);
+        ->paginate(10)->withQueryString();
 
         return view('pages.departamento', compact('departamentos'));
     }

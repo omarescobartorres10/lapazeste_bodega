@@ -243,15 +243,8 @@
     </div>
 
     <!-- Paginación -->
-    <div class="row mt-4">
-        <div class="col-12 col-md-6 mb-2 mb-md-0">
-            <p class="mb-0">Mostrando {{ $departamentos->firstItem() }} a {{ $departamentos->lastItem() }} de {{ $departamentos->total() }} departamentos</p>
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="d-flex justify-content-md-end justify-content-center">
-                {{ $departamentos->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
-            </div>
-        </div>
+    <div class="d-flex justify-content-center mt-3">
+        {{ $departamentos->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
     </div>
 </div>
 

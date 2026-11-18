@@ -4,33 +4,44 @@
 
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
-    <style>
-        .btn-circle-solid {
-            width: 38px;
-            height: 38px;
-            border-radius: 50% !important;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            border: none !important;
-            font-size: 18px;
-            cursor: pointer;
-            color: #fff !important;
-        }
-        .btn-blue   { background-color: #0d6efd !important; }
-        .btn-yellow { background-color: #ffc107 !important; color:#000 !important; }
+<style>
+    .historial-traslados-page .btn-circle-solid {
+        width: 38px;
+        height: 38px;
+        border-radius: 50% !important;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border: none !important;
+        font-size: 18px;
+        cursor: pointer;
+        color: #fff !important;
+    }
+    .historial-traslados-page .btn-blue   { background-color: #0d6efd !important; }
+    .historial-traslados-page .btn-yellow { background-color: #ffc107 !important; color:#000 !important; }
 
-        .btn-white-outline {
-            background: white !important;
-            border: 2px solid #ffffff !important;
-        }
-        .btn-white-outline i { color: #0d6efd !important; }
-    </style>
-</head>
+    .historial-traslados-page .btn-white-outline {
+        background: white !important;
+        border: 2px solid #ffffff !important;
+    }
+    .historial-traslados-page .btn-white-outline i { color: #0d6efd !important; }
+    .historial-traslados-page .pagination { gap: .25rem; }
+    .historial-traslados-page .page-link {
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 0.9rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.375rem 0.75rem !important;
+    }
+    .historial-traslados-page .page-link i,
+    .historial-traslados-page .page-link span {
+        font-size: 0.9rem !important;
+    }
+</style>
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 historial-traslados-page">
     <h1 class="mb-4">🚚 Historial de Traslados</h1>
 
     {{-- Filtro --}}
@@ -137,13 +148,14 @@
             </table>
         </div>
 
-        <div class="p-3">
-            {{ $traslados->links() }}
+        <div class="d-flex justify-content-center mt-3">
+            {{ $traslados->appends(request()->query())->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </div>
 
 {{-- MODAL DETALLE --}}
+<div class="historial-traslados-page">
 <div class="modal fade" id="modalDetalle" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -184,6 +196,7 @@
 
         </div>
     </div>
+</div>
 </div>
 
 <script>

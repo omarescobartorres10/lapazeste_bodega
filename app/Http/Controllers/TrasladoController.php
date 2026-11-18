@@ -40,7 +40,8 @@ class TrasladoController extends Controller
             ->when($hasta, fn($q) => $q->whereDate('created_at', '<=', $hasta))
             ->groupBy('codigo_operacion')
             ->orderByDesc('fecha')
-            ->paginate(15);
+            ->paginate(15)
+            ->withQueryString();
 
         $bodegas = Bodega::pluck('nombre', 'id');
 

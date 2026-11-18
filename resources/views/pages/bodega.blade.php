@@ -232,13 +232,8 @@
     </div>
 
     <!-- Paginación -->
-    <div class="row mt-4">
-        <div class="col-12 col-md-6">
-            <p class="mb-0">Mostrando {{ $bodegas->firstItem() }} a {{ $bodegas->lastItem() }} de {{ $bodegas->total() }} bodegas</p>
-        </div>
-        <div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-center">
-            {{ $bodegas->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
-        </div>
+    <div class="d-flex justify-content-center mt-3">
+        {{ $bodegas->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
     </div>
 </div>
 

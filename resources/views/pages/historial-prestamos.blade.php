@@ -4,36 +4,47 @@
 
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
-    <style>
-        .btn-circle-solid {
-            width: 38px;
-            height: 38px;
-            border-radius: 50% !important;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            border: none !important;
-            font-size: 18px;
-            cursor: pointer;
-            color: #fff !important;
-        }
-        .btn-purple { background-color: #6f42c1 !important; }
-        .btn-blue   { background-color: #0d6efd !important; }
-        .btn-yellow { background-color: #ffc107 !important; color:#000 !important; }
-        .btn-green  { background-color: #198754 !important; }
-        .btn-red    { background-color: #dc3545 !important; }
+<style>
+    .historial-prestamos-page .btn-circle-solid {
+        width: 38px;
+        height: 38px;
+        border-radius: 50% !important;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border: none !important;
+        font-size: 18px;
+        cursor: pointer;
+        color: #fff !important;
+    }
+    .historial-prestamos-page .btn-purple { background-color: #6f42c1 !important; }
+    .historial-prestamos-page .btn-blue   { background-color: #0d6efd !important; }
+    .historial-prestamos-page .btn-yellow { background-color: #ffc107 !important; color:#000 !important; }
+    .historial-prestamos-page .btn-green  { background-color: #198754 !important; }
+    .historial-prestamos-page .btn-red    { background-color: #dc3545 !important; }
 
-        .btn-white-outline {
-            background: white !important;
-            border: 2px solid #ffffff !important;
-        }
-        .btn-white-outline i { color: #6f42c1 !important; }
-    </style>
-</head>
+    .historial-prestamos-page .btn-white-outline {
+        background: white !important;
+        border: 2px solid #ffffff !important;
+    }
+    .historial-prestamos-page .btn-white-outline i { color: #6f42c1 !important; }
+    .historial-prestamos-page .pagination { gap: .25rem; }
+    .historial-prestamos-page .page-link {
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 0.9rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.375rem 0.75rem !important;
+    }
+    .historial-prestamos-page .page-link i,
+    .historial-prestamos-page .page-link span {
+        font-size: 0.9rem !important;
+    }
+</style>
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 historial-prestamos-page">
     <h1 class="mb-4">📚 Historial de Préstamos</h1>
 
     {{-- Filtro --}}
@@ -67,117 +78,118 @@
             <i class="bi bi-arrow-left-right"></i> Préstamos agrupados por operación
         </div>
 
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Código</th>
-                        <th>Bodega</th>
-                        <th>Departamento</th>
-                        <th>Ítems</th>
-                        <th>Prestado</th>
-                        <th>Devuelto</th>
-                        <th>Pendiente</th>
-                        <th>Fecha</th>
-                        <th>Destino</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @forelse($prestamos as $pre)
-                        @php
-                            $pendiente = $pre->total_prestado - $pre->total_devuelto;
-                        @endphp
-
-                        <tr class="
-                            {{ $pre->estado === 'cancelado' ? 'table-danger' : '' }}
-                            {{ $pre->estado === 'devuelto'  ? 'table-success' : '' }}
-                        ">
-                            <td><strong>{{ $pre->codigo_operacion }}</strong></td>
-
-                            <td>{{ strtoupper($bodegas[$pre->bodega_id] ?? '---') }}</td>
-                            <td>{{ strtoupper($departamentos[$pre->departamento_id] ?? '---') }}</td>
-
-                            <td class="text-center"><span class="badge bg-secondary">{{ $pre->total_items }}</span></td>
-                            <td class="text-center"><span class="badge bg-primary">{{ $pre->total_prestado }}</span></td>
-                            <td class="text-center"><span class="badge bg-success">{{ $pre->total_devuelto }}</span></td>
-                            <td class="text-center"><span class="badge bg-warning text-dark">{{ $pendiente }}</span></td>
-
-                            <td>{{ \Carbon\Carbon::parse($pre->fecha)->format('d/m/Y H:i') }}</td>
-                            <td>{{ strtoupper($pre->destino) }}</td>
-
-                            <td>
-                                @if($pre->estado === 'prestado')
-                                    <span class="badge bg-warning text-dark">PRESTADO</span>
-                                @elseif($pre->estado === 'parcial')
-                                    <span class="badge bg-info text-dark">PARCIAL</span>
-                                @elseif($pre->estado === 'devuelto')
-                                    <span class="badge bg-success">DEVUELTO</span>
-                                @elseif($pre->estado === 'cancelado')
-                                    <span class="badge bg-danger">CANCELADO</span>
-                                @endif
-                            </td>
-
-                            <td class="text-center">
-                                <div class="d-flex gap-2 justify-content-center">
-
-                                    {{-- Detalle --}}
-                                    <button class="btn-circle-solid btn-yellow btn-ver-detalle"
-                                        data-codigo="{{ $pre->codigo_operacion }}"
-                                        title="Ver detalle">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-
-                                    {{-- PDF --}}
-                                    <a href="{{ route('prestamos.pdf', $pre->codigo_operacion) }}"
-                                        class="btn-circle-solid btn-blue"
-                                        target="_blank"
-                                        title="Descargar PDF">
-                                        <i class="bi bi-file-earmark-pdf"></i>
-                                    </a>
-
-                                    {{-- Devolver todo --}}
-                                    @if(in_array($pre->estado, ['prestado','parcial']))
-                                        <button class="btn-circle-solid btn-green btn-devolver-todo"
-                                            data-codigo="{{ $pre->codigo_operacion }}"
-                                            title="Devolver todo">
-                                            <i class="bi bi-arrow-repeat"></i>
-                                        </button>
-
-                                        {{-- Devolución parcial --}}
-                                        <button class="btn-circle-solid btn-purple btn-devolver-parcial"
-                                            data-codigo="{{ $pre->codigo_operacion }}"
-                                            title="Devolución parcial">
-                                            <i class="bi bi-scissors"></i>
-                                        </button>
-                                    @endif
-
-                                    {{-- Cancelar --}}
-                                    @if(!in_array($pre->estado, ['cancelado','devuelto']))
-                                        <button class="btn-circle-solid btn-red btn-cancelar-op"
-                                            data-codigo="{{ $pre->codigo_operacion }}"
-                                            title="Cancelar préstamo">
-                                            <i class="bi bi-x-lg"></i>
-                                        </button>
-                                    @endif
-                                </div>
-                            </td>
-
-                        </tr>
-                    @empty
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-dark">
                         <tr>
-                            <td colspan="11" class="text-center py-3 text-muted">No hay registros.</td>
+                            <th>Código</th>
+                            <th>Bodega</th>
+                            <th>Departamento</th>
+                            <th>Ítems</th>
+                            <th>Prestado</th>
+                            <th>Devuelto</th>
+                            <th>Pendiente</th>
+                            <th>Fecha</th>
+                            <th>Destino</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
-                    @endforelse
-                </tbody>
+                    </thead>
 
-            </table>
-        </div>
+                    <tbody>
+                        @forelse($prestamos as $pre)
+                            @php
+                                $pendiente = $pre->total_prestado - $pre->total_devuelto;
+                            @endphp
 
-        <div class="p-3">
-            {{ $prestamos->links() }}
+                            <tr class="
+                                {{ $pre->estado === 'cancelado' ? 'table-danger' : '' }}
+                                {{ $pre->estado === 'devuelto'  ? 'table-success' : '' }}
+                            ">
+                                <td><strong>{{ $pre->codigo_operacion }}</strong></td>
+
+                                <td>{{ strtoupper($bodegas[$pre->bodega_id] ?? '---') }}</td>
+                                <td>{{ strtoupper($departamentos[$pre->departamento_id] ?? '---') }}</td>
+
+                                <td class="text-center"><span class="badge bg-secondary">{{ $pre->total_items }}</span></td>
+                                <td class="text-center"><span class="badge bg-primary">{{ $pre->total_prestado }}</span></td>
+                                <td class="text-center"><span class="badge bg-success">{{ $pre->total_devuelto }}</span></td>
+                                <td class="text-center"><span class="badge bg-warning text-dark">{{ $pendiente }}</span></td>
+
+                                <td>{{ \Carbon\Carbon::parse($pre->fecha)->format('d/m/Y H:i') }}</td>
+                                <td>{{ strtoupper($pre->destino) }}</td>
+
+                                <td>
+                                    @if($pre->estado === 'prestado')
+                                        <span class="badge bg-warning text-dark">PRESTADO</span>
+                                    @elseif($pre->estado === 'parcial')
+                                        <span class="badge bg-info text-dark">PARCIAL</span>
+                                    @elseif($pre->estado === 'devuelto')
+                                        <span class="badge bg-success">DEVUELTO</span>
+                                    @elseif($pre->estado === 'cancelado')
+                                        <span class="badge bg-danger">CANCELADO</span>
+                                    @endif
+                                </td>
+
+                                <td class="text-center">
+                                    <div class="d-flex gap-2 justify-content-center">
+
+                                        {{-- Detalle --}}
+                                        <button class="btn-circle-solid btn-yellow btn-ver-detalle"
+                                            data-codigo="{{ $pre->codigo_operacion }}"
+                                            title="Ver detalle">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+
+                                        {{-- PDF --}}
+                                        <a href="{{ route('prestamos.pdf', $pre->codigo_operacion) }}"
+                                            class="btn-circle-solid btn-blue"
+                                            target="_blank"
+                                            title="Descargar PDF">
+                                            <i class="bi bi-file-earmark-pdf"></i>
+                                        </a>
+
+                                        {{-- Devolver todo --}}
+                                        @if(in_array($pre->estado, ['prestado','parcial']))
+                                            <button class="btn-circle-solid btn-green btn-devolver-todo"
+                                                data-codigo="{{ $pre->codigo_operacion }}"
+                                                title="Devolver todo">
+                                                <i class="bi bi-arrow-repeat"></i>
+                                            </button>
+
+                                            {{-- Devolución parcial --}}
+                                            <button class="btn-circle-solid btn-purple btn-devolver-parcial"
+                                                data-codigo="{{ $pre->codigo_operacion }}"
+                                                title="Devolución parcial">
+                                                <i class="bi bi-scissors"></i>
+                                            </button>
+                                        @endif
+
+                                        {{-- Cancelar --}}
+                                        @if(!in_array($pre->estado, ['cancelado','devuelto']))
+                                            <button class="btn-circle-solid btn-red btn-cancelar-op"
+                                                data-codigo="{{ $pre->codigo_operacion }}"
+                                                title="Cancelar préstamo">
+                                                <i class="bi bi-x-lg"></i>
+                                            </button>
+                                        @endif
+                                    </div>
+                                </td>
+
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="11" class="text-center py-3 text-muted">No hay registros.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+                {{ $prestamos->appends(request()->query())->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     </div>
 </div>
@@ -185,6 +197,7 @@
 {{-- ===================== --}}
 {{-- MODAL DETALLE --}}
 {{-- ===================== --}}
+<div class="historial-prestamos-page">
 <div class="modal fade" id="modalDetalle" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -223,6 +236,7 @@
 
         </div>
     </div>
+</div>
 </div>
 
 {{-- ===================== --}}

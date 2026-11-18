@@ -187,16 +187,9 @@
     </div>
 
     <!-- Paginación -->
-    <div class="row mt-4">
-        <div class="col-12 col-md-6 mb-2 mb-md-0">
-            <p class="mb-0">Mostrando {{ $unidades->firstItem() }} a {{ $unidades->lastItem() }} de {{ $unidades->total() }} unidades</p>
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="d-flex justify-content-md-end justify-content-center">
-                {{ $unidades->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
-            </div>
-        </div>
-    </div>  
+    <div class="d-flex justify-content-center mt-3">
+        {{ $unidades->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
+    </div>
 </div>
 
 <!-- Toast de notificación -->

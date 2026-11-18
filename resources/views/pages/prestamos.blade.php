@@ -3,11 +3,6 @@
 @section('title', 'Registro de Préstamos')
 
 @section('content')
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-
 <div class="container-fluid py-4">
     <h1 class="mb-4">📤 Registro de Préstamos</h1>
 

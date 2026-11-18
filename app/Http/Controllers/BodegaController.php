@@ -21,7 +21,7 @@ class BodegaController extends Controller
                          ->orWhere('correo', 'like', "%{$buscar}%");
         })
         ->orderBy('id', 'desc')
-        ->paginate(10);
+        ->paginate(10)->withQueryString();
 
         return view('pages.bodega', compact('bodegas'));
     }

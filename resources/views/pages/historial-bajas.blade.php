@@ -4,40 +4,50 @@
 
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+<style>
+    .historial-bajas-page .btn-circle-solid {
+        width: 38px;
+        height: 38px;
+        border-radius: 50% !important;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border: none !important;
+        color: #fff !important;
+        font-size: 18px;
+        cursor: pointer;
+    }
 
-    <style>
-        .btn-circle-solid {
-            width: 38px;
-            height: 38px;
-            border-radius: 50% !important;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            border: none !important;
-            color: #fff !important;
-            font-size: 18px;
-            cursor: pointer;
-        }
+    .historial-bajas-page .btn-red    { background-color: #dc3545 !important; }
+    .historial-bajas-page .btn-yellow { background-color: #ffc107 !important; color:#000 !important; }
+    .historial-bajas-page .btn-blue   { background-color: #0d6efd !important; }
 
-        .btn-red    { background-color: #dc3545 !important; }
-        .btn-yellow { background-color: #ffc107 !important; color:#000 !important; }
-        .btn-blue   { background-color: #0d6efd !important; }
+    .historial-bajas-page .btn-circle-solid i { font-size: 17px; }
 
-        .btn-circle-solid i { font-size: 17px; }
+    .historial-bajas-page .btn-white-outline {
+        background: white !important;
+        border: 2px solid #ffffff !important;
+    }
+    .historial-bajas-page .btn-white-outline i {
+        color: #dc3545 !important;
+    }
+    .historial-bajas-page .pagination { gap: .25rem; }
+    .historial-bajas-page .page-link {
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 0.9rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.375rem 0.75rem !important;
+    }
+    .historial-bajas-page .page-link i,
+    .historial-bajas-page .page-link span {
+        font-size: 0.9rem !important;
+    }
+</style>
 
-        .btn-white-outline {
-            background: white !important;
-            border: 2px solid #ffffff !important;
-        }
-        .btn-white-outline i {
-            color: #dc3545 !important;
-        }
-    </style>
-</head>
-
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 historial-bajas-page">
 
     <h1 class="mb-4 text-danger">
         🔥 Historial de Bajas
@@ -176,8 +186,8 @@
             </table>
         </div>
 
-        <div class="p-3">
-            {{ $bajas->links() }}
+        <div class="d-flex justify-content-center mt-3">
+            {{ $bajas->appends(request()->query())->links('pagination::bootstrap-5') }}
         </div>
     </div>
 
@@ -185,6 +195,7 @@
 
 
 {{-- MODAL DETALLE --}}
+<div class="historial-bajas-page">
 <div class="modal fade" id="modalDetalle" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -220,6 +231,7 @@
 
         </div>
     </div>
+</div>
 </div>
 
 

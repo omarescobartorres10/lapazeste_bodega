@@ -15,3 +15,5 @@ class Departamento extends Model
         'estado',
     ];
 }
+
+

@@ -4,36 +4,47 @@
 
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
-    <style>
-        .btn-circle-solid {
-            width: 38px;
-            height: 38px;
-            border-radius: 50% !important;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            border: none !important;
-            color: white !important;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        .btn-blue   { background-color: #007bff !important; }
-        .btn-yellow { background-color: #ffc107 !important; color: #000 !important; }
-        .btn-red    { background-color: #dc3545 !important; }
-        .btn-circle-solid i { font-size: 17px; }
-        .btn-white-outline {
-            background: white !important;
-            border: 2px solid #ffffff !important;
-        }
-        .btn-white-outline i {
-            color: #007bff !important;
-        }
-    </style>
-</head>
+<style>
+    .historial-salidas-page .btn-circle-solid {
+        width: 38px;
+        height: 38px;
+        border-radius: 50% !important;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border: none !important;
+        color: white !important;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .historial-salidas-page .btn-blue   { background-color: #007bff !important; }
+    .historial-salidas-page .btn-yellow { background-color: #ffc107 !important; color: #000 !important; }
+    .historial-salidas-page .btn-red    { background-color: #dc3545 !important; }
+    .historial-salidas-page .btn-circle-solid i { font-size: 17px; }
+    .historial-salidas-page .btn-white-outline {
+        background: white !important;
+        border: 2px solid #ffffff !important;
+    }
+    .historial-salidas-page .btn-white-outline i {
+        color: #007bff !important;
+    }
+    .historial-salidas-page .pagination { gap: .25rem; }
+    .historial-salidas-page .page-link {
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 0.9rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.375rem 0.75rem !important;
+    }
+    .historial-salidas-page .page-link i,
+    .historial-salidas-page .page-link span {
+        font-size: 0.9rem !important;
+    }
+</style>
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 historial-salidas-page">
 
     <h1 class="mb-4">📑 Historial de Salidas</h1>
 
@@ -170,14 +181,15 @@
             </table>
         </div>
 
-        <div class="p-3">
-            {{ $salidas->links() }}
+        <div class="d-flex justify-content-center mt-3">
+            {{ $salidas->appends(request()->query())->links('pagination::bootstrap-5') }}
         </div>
     </div>
 
 </div>
 
 {{-- MODAL DETALLE --}}
+<div class="historial-salidas-page">
 <div class="modal fade" id="modalDetalleSalida" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -213,6 +225,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

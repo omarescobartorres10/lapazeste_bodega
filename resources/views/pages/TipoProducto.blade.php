@@ -203,17 +203,10 @@
         </div>
     </div>
 
-    <!-- Paginación con botones de siguiente y atrás -->
-    <div class="row mt-4">
-        <div class="col-12 col-md-6 mb-2 mb-md-0">
-            <p class="mb-0">Mostrando {{ $tipoProducto->firstItem() }} a {{ $tipoProducto->lastItem() }} de {{ $tipoProducto->total() }} tipos de productos</p>
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="d-flex justify-content-md-end justify-content-center">
-                {{ $tipoProducto->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
-            </div>
-        </div>
-    </div>  
+    <!-- Paginación -->
+    <div class="d-flex justify-content-center mt-3">
+        {{ $tipoProducto->appends(['buscar' => request('buscar')])->links('pagination::bootstrap-5') }}
+    </div>
 </div>
 
 <!-- Toast de notificación -->

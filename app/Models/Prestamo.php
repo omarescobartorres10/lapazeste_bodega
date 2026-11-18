@@ -51,3 +51,5 @@ class Prestamo extends Model
         return $this->belongsTo(Departamento::class);
     }
 }
+
+

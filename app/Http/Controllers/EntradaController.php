@@ -65,6 +65,7 @@ class EntradaController extends Controller
         ], [
             'factura_pdf.max' => 'El PDF no debe pesar más de 10 MB.',
             'factura_pdf.mimes' => 'La factura debe ser un archivo PDF.',
+            
         ]);
 
         $facturaPdf = $request->file('factura_pdf');
@@ -259,7 +260,8 @@ class EntradaController extends Controller
             ->when($hasta, fn($q) => $q->whereDate('created_at', '<=', $hasta))
             ->groupBy('codigo_operacion', 'recibido_por', 'entregado_por')
             ->orderByDesc('fecha')
-            ->paginate(15);
+            ->paginate(15)
+            ->withQueryString();
 
         $bodegas = Bodega::pluck('nombre', 'id');
         $departamentos = Departamento::pluck('nombre', 'id');

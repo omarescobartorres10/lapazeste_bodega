@@ -4,41 +4,51 @@
 
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+<style>
+    .historial-entradas-page .btn-circle-solid {
+        width: 38px;
+        height: 38px;
+        border-radius: 50% !important;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border: none !important;
+        color: white !important;
+        font-size: 18px;
+        cursor: pointer;
+        text-decoration: none !important;
+    }
 
-    <style>
-        .btn-circle-solid {
-            width: 38px;
-            height: 38px;
-            border-radius: 50% !important;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            border: none !important;
-            color: white !important;
-            font-size: 18px;
-            cursor: pointer;
-            text-decoration: none !important;
-        }
+    .historial-entradas-page .btn-blue { background-color: #007bff !important; }
+    .historial-entradas-page .btn-yellow { background-color: #ffc107 !important; color: #000 !important; }
+    .historial-entradas-page .btn-red { background-color: #dc3545 !important; }
+    .historial-entradas-page .btn-green { background-color: #198754 !important; }
 
-        .btn-blue { background-color: #007bff !important; }
-        .btn-yellow { background-color: #ffc107 !important; color: #000 !important; }
-        .btn-red { background-color: #dc3545 !important; }
-        .btn-green { background-color: #198754 !important; }
+    .historial-entradas-page .btn-circle-solid i { font-size: 17px; }
 
-        .btn-circle-solid i { font-size: 17px; }
+    .historial-entradas-page .btn-white-outline {
+        background: white !important;
+        border: 2px solid #ffffff !important;
+    }
 
-        .btn-white-outline {
-            background: white !important;
-            border: 2px solid #ffffff !important;
-        }
+    .historial-entradas-page .btn-white-outline i { color: #007bff !important; }
+    .historial-entradas-page .pagination { gap: .25rem; }
+    .historial-entradas-page .page-link {
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 0.9rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.375rem 0.75rem !important;
+    }
+    .historial-entradas-page .page-link i,
+    .historial-entradas-page .page-link span {
+        font-size: 0.9rem !important;
+    }
+</style>
 
-        .btn-white-outline i { color: #007bff !important; }
-    </style>
-</head>
-
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 historial-entradas-page">
 
     <h1 class="mb-4">📑 Historial de Entradas</h1>
 
@@ -192,13 +202,14 @@
             </table>
         </div>
 
-        <div class="p-3">
-            {{ $entradas->links() }}
+        <div class="d-flex justify-content-center mt-3">
+            {{ $entradas->appends(request()->query())->links('pagination::bootstrap-5') }}
         </div>
     </div>
 
 </div>
 
+<div class="historial-entradas-page">
 <div class="modal fade" id="modalDetalle" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -236,6 +247,7 @@
 
         </div>
     </div>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

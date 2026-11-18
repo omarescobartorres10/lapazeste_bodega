@@ -12,7 +12,10 @@ class TipoProductoController extends Controller
     {
         $tipoProducto = TipoProducto::when($request->buscar, function($query) use ($request) {
             return $query->where('nombre', 'like', '%' . $request->buscar . '%');
-        })->paginate(5);
+        })
+        ->orderBy('id', 'desc')
+        ->paginate(10)
+        ->withQueryString();
 
         return view('pages.TipoProducto', compact('tipoProducto'));
     }
