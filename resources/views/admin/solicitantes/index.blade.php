@@ -146,12 +146,14 @@
                                         {{-- EDITAR --}}
                                         <button class="btn btn-warning btn-sm"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#modalEditar{{ $s->id }}">
+                                            data-bs-target="#modalEditar{{ $s->id }}"
+                                            title="Editar solicitante">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
 
                                         {{-- ELIMINAR --}}
-                                        <button class="btn btn-danger btn-sm btn-delete" data-id="{{ $s->id }}">
+                                        <button class="btn btn-danger btn-sm btn-delete" data-id="{{ $s->id }}"
+                                            title="Eliminar solicitante">
                                             <i class="bi bi-trash"></i>
                                         </button>
 

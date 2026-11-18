@@ -139,14 +139,16 @@
 
                                     {{-- 🟡 Ver detalle --}}
                                     <button class="btn-circle-solid btn-yellow ver-detalle"
-                                        data-codigo="{{ $baj->codigo_operacion }}">
+                                        data-codigo="{{ $baj->codigo_operacion }}"
+                                        title="Ver detalle">
                                         <i class="bi bi-eye"></i>
                                     </button>
 
                                     {{-- 🔵 PDF --}}
                                     <a href="{{ route('bajas.pdf', $baj->codigo_operacion) }}"
                                         class="btn-circle-solid btn-blue"
-                                        target="_blank">
+                                        target="_blank"
+                                        title="Descargar PDF">
                                         <i class="bi bi-file-earmark-pdf"></i>
                                     </a>
 
@@ -154,7 +156,8 @@
                                     @auth
                                         @if(Auth::user()->rol === 'admin' && $baj->estado == 1)
                                             <button class="btn-circle-solid btn-red cancelar-baja"
-                                                data-codigo="{{ $baj->codigo_operacion }}">
+                                                data-codigo="{{ $baj->codigo_operacion }}"
+                                                title="Cancelar baja">
                                                 <i class="bi bi-x-lg"></i>
                                             </button>
                                         @endif

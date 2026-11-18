@@ -128,7 +128,8 @@
                                                 @csrf
                                                 <button type="button"
                                                     class="btn btn-warning btn-sm rounded-pill btn-entregar"
-                                                    data-id="{{ $s->id }}">
+                                                    data-id="{{ $s->id }}"
+                                                    title="Marcar como entregado">
                                                     <i class="bi bi-check-circle"></i> Entregar
                                                 </button>
                                             </form>

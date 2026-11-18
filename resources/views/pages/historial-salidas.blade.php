@@ -135,21 +135,24 @@
 
                                     {{-- Ver detalle --}}
                                     <button class="btn-circle-solid btn-yellow ver-detalle"
-                                            data-codigo="{{ $sal->codigo_operacion }}">
+                                            data-codigo="{{ $sal->codigo_operacion }}"
+                                            title="Ver detalle">
                                         <i class="bi bi-eye"></i>
                                     </button>
 
                                     {{-- PDF --}}
                                     <a href="{{ route('salidas.pdf', $sal->codigo_operacion) }}"
                                         class="btn-circle-solid btn-blue"
-                                        target="_blank">
+                                        target="_blank"
+                                        title="Descargar PDF">
                                         <i class="bi bi-file-earmark-pdf"></i>
                                     </a>
 
                                     {{-- Cancelar SOLO si está activa --}}
                                     @if($sal->estado == 1)
                                     <button class="btn-circle-solid btn-red cancelar-salida"
-                                            data-codigo="{{ $sal->codigo_operacion }}">
+                                            data-codigo="{{ $sal->codigo_operacion }}"
+                                            title="Cancelar salida">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                     @endif

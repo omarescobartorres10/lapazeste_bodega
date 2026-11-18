@@ -213,7 +213,8 @@
                                             <button 
                                                 type="submit" 
                                                 class="btn btn-sm {{ $categoria->estado == 1 ? 'btn-danger' : 'btn-success' }}" 
-                                                style="font-size: 14px; padding: 4px;">
+                                                style="font-size: 14px; padding: 4px;"
+                                                title="{{ $categoria->estado == 1 ? 'Desactivar categoría' : 'Activar categoría' }}">
                                                 <i class="fas fa-toggle-{{ $categoria->estado == 1 ? 'off' : 'on' }}"></i>                                                
                                             </button>
                                         </form>

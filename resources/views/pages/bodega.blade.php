@@ -161,7 +161,8 @@
                                         <form action="{{ $bodega->estado == 'Activo' ? route('bodegas.desactivar', $bodega->id) : route('bodegas.activar', $bodega->id) }}" method="POST" class="d-inline-flex">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-sm {{ $bodega->estado == 'Activo' ? 'btn-danger' : 'btn-success' }}">
+                                            <button type="submit" class="btn btn-sm {{ $bodega->estado == 'Activo' ? 'btn-danger' : 'btn-success' }}"
+                                                title="{{ $bodega->estado == 'Activo' ? 'Desactivar bodega' : 'Activar bodega' }}">
                                                 <i class="fas fa-toggle-{{ $bodega->estado == 'Activo' ? 'off' : 'on' }}"></i>
                                             </button>
                                         </form>

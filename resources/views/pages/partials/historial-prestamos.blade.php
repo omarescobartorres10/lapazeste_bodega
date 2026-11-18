@@ -51,14 +51,14 @@
                                     <form action="{{ route('prestamos.devolver', $p->id) }}" method="POST" class="m-0">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-sm btn-success">
+                                        <button type="submit" class="btn btn-sm btn-success" title="Marcar como devuelto">
                                             <i class="bi bi-check2-circle"></i> Devolver
                                         </button>
                                     </form>
                                     <form action="{{ route('prestamos.cancelar', $p->id) }}" method="POST" class="m-0">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-sm btn-danger">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Cancelar préstamo">
                                             <i class="bi bi-x-circle"></i> Cancelar
                                         </button>
                                     </form>

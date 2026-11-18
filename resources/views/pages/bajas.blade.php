@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="col-md-1 text-center">
-                            <button type="button" class="btn btn-danger btn-remove mt-3">
+                            <button type="button" class="btn btn-danger btn-remove mt-3" title="Eliminar producto">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>

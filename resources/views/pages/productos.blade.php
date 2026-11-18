@@ -163,6 +163,7 @@
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
                                                 <button class="btn btn-warning btn-sm btnEditar"
+                                                    title="Editar artículo"
                                                     data-id="{{ $producto->id }}"
                                                     data-update-url="{{ route('productos.update', $producto->id) }}"
                                                     data-codigo="{{ $producto->codigo }}"
@@ -183,7 +184,8 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <button type="submit"
-                                                        class="btn btn-sm {{ $producto->estado ? 'btn-danger' : 'btn-success' }}">
+                                                        class="btn btn-sm {{ $producto->estado ? 'btn-danger' : 'btn-success' }}"
+                                                        title="{{ $producto->estado ? 'Desactivar artículo' : 'Activar artículo' }}">
                                                         <i class="bi bi-toggle-{{ $producto->estado ? 'off' : 'on' }}"></i>
                                                     </button>
                                                 </form>
@@ -505,6 +507,7 @@
                             <td class="text-center">
                                 <div class="d-flex justify-content-center gap-2">
                                     <button class="btn btn-warning btn-sm btnEditar"
+                                        title="Editar artículo"
                                         data-id="${p.id}"
                                         data-update-url="${BASE_PRODUCTOS_UPDATE}/${p.id}"
                                         data-codigo="${p.codigo ?? ''}"
@@ -524,7 +527,7 @@
                                     <form class="form-toggle" method="POST" action="/productos/${p.id}/${p.estado == 1 ? 'desactivar' : 'activar'}">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-sm ${p.estado == 1 ? 'btn-danger' : 'btn-success'}">
+                                        <button type="submit" class="btn btn-sm ${p.estado == 1 ? 'btn-danger' : 'btn-success'}" title="${p.estado == 1 ? 'Desactivar artículo' : 'Activar artículo'}">
                                             <i class="bi bi-toggle-${p.estado == 1 ? 'off' : 'on'}"></i>
                                         </button>
                                     </form>

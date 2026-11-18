@@ -111,14 +111,16 @@
                                     {{-- Detalle --}}
                                     <button type="button"
                                             class="btn-circle-solid btn-yellow btn-ver-detalle"
-                                            data-codigo="{{ $t->codigo_operacion }}">
+                                            data-codigo="{{ $t->codigo_operacion }}"
+                                            title="Ver detalle">
                                         <i class="bi bi-eye"></i>
                                     </button>
 
                                     {{-- PDF (igual que salidas) --}}
                                     <a href="{{ route('traslados.pdf', $t->codigo_operacion) }}"
                                        class="btn-circle-solid btn-blue"
-                                       target="_blank">
+                                       target="_blank"
+                                       title="Descargar PDF">
                                         <i class="bi bi-file-earmark-pdf"></i>
                                     </a>
 

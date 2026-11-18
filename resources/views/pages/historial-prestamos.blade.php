@@ -125,27 +125,31 @@
 
                                     {{-- Detalle --}}
                                     <button class="btn-circle-solid btn-yellow btn-ver-detalle"
-                                        data-codigo="{{ $pre->codigo_operacion }}">
+                                        data-codigo="{{ $pre->codigo_operacion }}"
+                                        title="Ver detalle">
                                         <i class="bi bi-eye"></i>
                                     </button>
 
                                     {{-- PDF --}}
                                     <a href="{{ route('prestamos.pdf', $pre->codigo_operacion) }}"
                                         class="btn-circle-solid btn-blue"
-                                        target="_blank">
+                                        target="_blank"
+                                        title="Descargar PDF">
                                         <i class="bi bi-file-earmark-pdf"></i>
                                     </a>
 
                                     {{-- Devolver todo --}}
                                     @if(in_array($pre->estado, ['prestado','parcial']))
                                         <button class="btn-circle-solid btn-green btn-devolver-todo"
-                                            data-codigo="{{ $pre->codigo_operacion }}">
+                                            data-codigo="{{ $pre->codigo_operacion }}"
+                                            title="Devolver todo">
                                             <i class="bi bi-arrow-repeat"></i>
                                         </button>
 
                                         {{-- Devolución parcial --}}
                                         <button class="btn-circle-solid btn-purple btn-devolver-parcial"
-                                            data-codigo="{{ $pre->codigo_operacion }}">
+                                            data-codigo="{{ $pre->codigo_operacion }}"
+                                            title="Devolución parcial">
                                             <i class="bi bi-scissors"></i>
                                         </button>
                                     @endif
@@ -153,7 +157,8 @@
                                     {{-- Cancelar --}}
                                     @if(!in_array($pre->estado, ['cancelado','devuelto']))
                                         <button class="btn-circle-solid btn-red btn-cancelar-op"
-                                            data-codigo="{{ $pre->codigo_operacion }}">
+                                            data-codigo="{{ $pre->codigo_operacion }}"
+                                            title="Cancelar préstamo">
                                             <i class="bi bi-x-lg"></i>
                                         </button>
                                     @endif

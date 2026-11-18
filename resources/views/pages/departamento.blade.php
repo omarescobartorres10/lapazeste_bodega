@@ -166,7 +166,8 @@
                                         <form action="{{ route('departamentos.destroy', $departamento->id) }}" method="POST" class="form-eliminar d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                title="Eliminar departamento">
                                                 <i class="bi bi-trash"></i> Eliminar
                                             </button>
                                         </form>

@@ -138,7 +138,8 @@
                                         <form action="{{ $unidad->estado == 1 ? route('unidades.desactivar', $unidad->id) : route('unidades.activar', $unidad->id) }}" method="POST" class="d-inline-flex">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-sm {{ $unidad->estado == 1 ? 'btn-danger' : 'btn-success' }}">
+                                            <button type="submit" class="btn btn-sm {{ $unidad->estado == 1 ? 'btn-danger' : 'btn-success' }}"
+                                                title="{{ $unidad->estado == 1 ? 'Desactivar unidad' : 'Activar unidad' }}">
                                                 <i class="fas fa-toggle-{{ $unidad->estado == 1 ? 'off' : 'on' }}"></i>                                                
                                             </button>
                                         </form>

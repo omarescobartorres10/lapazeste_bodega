@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="col-md-1 text-center">
-                            <button type="button" class="btn btn-danger btn-remove">
+                            <button type="button" class="btn btn-danger btn-remove" title="Eliminar producto">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
