@@ -174,16 +174,12 @@
         <div id="collapseSolicitudes" class="collapse" data-bs-parent="#accordionSidebar">
             <div class="bg-light py-2 collapse-inner rounded shadow-sm">
 
-                {{-- Administración interna --}}
-                <h6 class="collapse-header text-primary fw-bold">
-                    <i class="fas fa-cogs me-1" style="font-size:.7rem;"></i> Administración
-                </h6>
+                <h6 class="collapse-header text-primary fw-bold">Gestión de Solicitudes</h6>
 
-                <a class="collapse-item d-flex align-items-center" href="{{ route('solicitud.index') }}">
-                    <i class="fas fa-clipboard-list me-2 text-primary"></i>
-                    <span>Listado de Solicitudes</span>
+                <a class="collapse-item" href="{{ route('solicitud.index') }}">
+                    <i class="fas fa-clipboard-list"></i> Listado de Solicitudes
                     @if(isset($solicitudesPendientes) && $solicitudesPendientes > 0)
-                        <span class="badge bg-warning text-dark rounded-pill ms-auto" style="font-size:.65rem;">
+                        <span class="badge bg-warning text-dark rounded-pill ms-1" style="font-size:.65rem;">
                             {{ $solicitudesPendientes }}
                         </span>
                     @endif
@@ -191,31 +187,20 @@
 
                 @auth
                     @if(Auth::user()->rol === 'admin')
-                        <a class="collapse-item d-flex align-items-center" href="{{ route('solicitantes.index') }}">
-                            <i class="fas fa-user-friends me-2 text-info"></i>
-                            <span>Gestión de Solicitantes</span>
+                        <a class="collapse-item" href="{{ route('solicitantes.index') }}">
+                            <i class="fas fa-user-friends"></i> Gestión de Solicitantes
                         </a>
                     @endif
                 @endauth
 
-                {{-- Separador visual --}}
-                <hr class="mx-3 my-1" style="border-color:#cbd3de;">
-
-                {{-- Portal público --}}
-                <h6 class="collapse-header fw-bold" style="color:#0d6efd;">
-                    <i class="fas fa-globe me-1" style="font-size:.7rem;"></i> Portal Público
-                </h6>
-
-                <a class="collapse-item d-flex align-items-center" href="{{ route('solicitud.login') }}" target="_blank">
-                    <i class="fas fa-sign-in-alt me-2 text-success"></i>
-                    <span>Ingreso de Solicitudes</span>
-                    <i class="fas fa-external-link-alt ms-auto text-muted" style="font-size:.65rem;"></i>
+                <a class="collapse-item pe-4" href="{{ route('solicitud.login') }}" target="_blank">
+                    <i class="fas fa-door-open"></i> Ingreso de Solicitudes
+                    <i class="fas fa-external-link-alt ms-1 text-muted" style="font-size:.65rem;"></i>
                 </a>
 
-                <a class="collapse-item d-flex align-items-center" href="{{ route('solicitud.consultar') }}" target="_blank">
-                    <i class="fas fa-search me-2 text-warning"></i>
-                    <span>Consulta de Estado</span>
-                    <i class="fas fa-external-link-alt ms-auto text-muted" style="font-size:.65rem;"></i>
+                <a class="collapse-item pe-4" href="{{ route('solicitud.consultar') }}" target="_blank">
+                    <i class="fas fa-list-alt"></i> Consulta de Estado
+                    <i class="fas fa-external-link-alt ms-1 text-muted" style="font-size:.65rem;"></i>
                 </a>
             </div>
         </div>
