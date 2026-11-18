@@ -138,7 +138,7 @@
                                     </td>
                                     <td class="text-center">
                                         <!-- Botón Editar -->
-                                        <button class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" data-bs-target="#editarTipoproducto{{ $tipo->id }}" style="font-size: 14px; padding: 4px;">
+                                        <button class="btn btn-warning btn-sm" title="Editar tipo de producto" data-bs-toggle="modal" data-bs-target="#editarTipoproducto{{ $tipo->id }}" style="font-size: 14px; padding: 4px;">
                                             <i class="fas fa-edit"></i>
                                         </button>
 

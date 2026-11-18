@@ -130,7 +130,7 @@
                                     </td>
                                     <td class="text-center">
                                         <!-- Botón Editar -->
-                                        <button class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" data-bs-target="#editarUnidad{{ $unidad->id }}">
+                                        <button class="btn btn-warning btn-sm" title="Editar unidad de medida" data-bs-toggle="modal" data-bs-target="#editarUnidad{{ $unidad->id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
 

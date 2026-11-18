@@ -195,7 +195,7 @@
                                         <button 
                                             type="button"
                                             class="btn btn-warning btn-sm" 
-                                            title="Editar" 
+                                            title="Editar categoría" 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#editarCategoria{{ $categoria->id }}" 
                                             style="font-size: 14px; padding: 4px;">
