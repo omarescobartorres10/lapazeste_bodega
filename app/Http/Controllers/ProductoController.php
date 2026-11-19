@@ -767,11 +767,6 @@ class ProductoController extends Controller
     {
         $user = Auth::user();
         
-        // 🛡️ Si tiene bodega asignada, no puede ver otras bodegas
-        if ($user->bodega_id) {
-            return response()->json(['error' => 'No tienes permiso para ver otras bodegas.'], 403);
-        }
-        
         $bodegaAsignada =
             $user->bodega_id ?? null;
 
