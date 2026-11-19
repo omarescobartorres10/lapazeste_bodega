@@ -158,7 +158,7 @@
         <tr>
             <td>
                 <div class="signature-line"></div>
-                <div class="signature-name">{{ $recibido }}</div>
+                <div class="signature-name">{{ $entregado }}</div>
                 <div class="signature-role">Nombre, firma y sello</div>
                 <div class="signature-role text-bold" style="margin-top: 10px;">
                     SALIDA REGISTRADA EL {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y H:i') }}
@@ -166,7 +166,7 @@
             </td>
             <td>
                 <div class="signature-line"></div>
-                <div class="signature-name">{{ $entregado }}</div>
+                <div class="signature-name">{{ $recibido }}</div>
                 <div class="signature-role">ENCARGADO DE BODEGA GENERAL</div>
                 <div class="signature-role">Firma y sello</div>
             </td>
